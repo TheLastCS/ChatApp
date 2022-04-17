@@ -18783,11 +18783,11 @@ namespace ChatApp.Droid
 		public partial class Mipmap
 		{
 			
-			// aapt resource value: 0x7F0C0009
-			public const int icon = 2131492873;
+			// aapt resource value: 0x7F0C000C
+			public const int icon = 2131492876;
 			
-			// aapt resource value: 0x7F0C000A
-			public const int icon_round = 2131492874;
+			// aapt resource value: 0x7F0C000D
+			public const int icon_round = 2131492877;
 			
 			// aapt resource value: 0x7F0C0000
 			public const int ic_launcher = 2131492864;
@@ -18814,10 +18814,19 @@ namespace ChatApp.Droid
 			public const int ic_launcher_foreground = 2131492871;
 			
 			// aapt resource value: 0x7F0C0008
-			public const int ic_launcher_round = 2131492872;
+			public const int ic_launcher_off = 2131492872;
+			
+			// aapt resource value: 0x7F0C0009
+			public const int ic_launcher_off_foreground = 2131492873;
+			
+			// aapt resource value: 0x7F0C000A
+			public const int ic_launcher_off_round = 2131492874;
 			
 			// aapt resource value: 0x7F0C000B
-			public const int launcher_foreground = 2131492875;
+			public const int ic_launcher_round = 2131492875;
+			
+			// aapt resource value: 0x7F0C000E
+			public const int launcher_foreground = 2131492878;
 			
 			static Mipmap()
 			{
