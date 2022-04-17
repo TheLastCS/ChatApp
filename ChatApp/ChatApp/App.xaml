@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:ChatApp.Helpers"
              x:Class="ChatApp.App">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <local:ScaleXAML x:Key="scale"/>
+            <Style x:Key="EntryStyle" TargetType="Entry" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
