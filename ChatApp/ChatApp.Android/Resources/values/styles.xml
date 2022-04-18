@@ -15,8 +15,8 @@
          which is used to tint widgets -->
     <!--<item name="colorAccent">#FF4081</item>-->
   </style>
-	<style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
-		<item name="android:windowBackground">@drawable/SplashImage</item>
+	<style name="splashscreen" parent="Theme.AppCompat.Light.NoActionBar">
+		<item name="android:windowBackground">@drawable/logo</item>
 		<item name="android:windowNoTitle">true</item>
 		<item name="android:windowIsTranslucent">false</item>
 		<item name="android:windowIsFloating">false</item>
