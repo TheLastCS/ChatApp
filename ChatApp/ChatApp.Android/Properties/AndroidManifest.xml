@@ -4,8 +4,8 @@
     <application
 		android:label="ChatApp.Android"
 		android:theme="@style/MainTheme"
-		android:icon="@mipmap/ic_launcher"
-		android:roundIcon="@mipmap/ic_launcher_round">
+		android:icon="@mipmap/ic_launcher_foreground"
+		android:roundIcon="@mipmap/ic_launcher_foreground">
 	</application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>
