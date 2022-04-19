@@ -9,7 +9,7 @@
             <Image x:Name="Logo" Source="Login" Aspect="AspectFill"></Image>
         </Frame>
         <StackLayout>
-            <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="10">
+            <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8">
                 <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray">
                     <Entry.Triggers>
                         <Trigger TargetType="Entry" Property="IsFocused" Value="true">
@@ -18,7 +18,7 @@
                     </Entry.Triggers>
                 </Entry>
             </Frame>
-            <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10" CornerRadius="15" HasShadow="True" Padding="10">
+            <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10" CornerRadius="15" HasShadow="True" Padding="8">
                 <Grid>
                     <Entry Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray">
                         <Entry.Triggers>
