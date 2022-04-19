@@ -1,24 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ChatApp"
              x:Class="ChatApp.MainPage">
 
     <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        <Frame BackgroundColor="White" Padding="24" CornerRadius="0">
+            <Image x:Name="Logo" Source="Logo" Aspect="AspectFill"></Image>
         </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+        <Frame BackgroundColor="White" Padding="12" CornerRadius="0">
+            <Label x:Name="AppName" Text="Wave" TextTransform="Uppercase" FontSize="Title"></Label>
+        </Frame>
+        <Frame BackgroundColor="Transparent" Margin="5" CornerRadius="15" HasShadow="True" BorderColor="Black">
+            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" Style="{DynamicResource EntryStyle}">
+                <Entry.Triggers>
+                    <Trigger TargetType="Entry" Property="IsFocused" Value="True">
+                        <Setter Property="BackgroundColor" Value="LightBlue" />
+                    </Trigger>
+                </Entry.Triggers>
+            </Entry>
+        </Frame>
+
+        <Frame BackgroundColor="Transparent" Margin="5" CornerRadius="15" HasShadow="True" BorderColor="Black">
+            <Grid>
+                <Entry Placeholder="Password"
+                IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}">
+                    <Entry.Triggers>
+                        <Trigger TargetType="Entry" Property="IsFocused" Value="true">
+                            <!--<Setter Property="" Value=""></Setter>-->
+                        </Trigger>
+                    </Entry.Triggers>
+                </Entry>
+
+                <ImageButton VerticalOptions="Center"
+                     Margin="0,0,10,0"
+                     HeightRequest="20"
+                     HorizontalOptions="End"
+                     Source="ic_eye_hide">
+                    <ImageButton.Triggers>
+                        <EventTrigger Event="Clicked">
+                            <local:ShowPasswordTriggerAction ShowIcon="ic_eye"
+                                                                    HideIcon="ic_eye_hide"
+                                                                    x:Name="ShowPasswordActualTrigger"/>
+                        </EventTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
+            </Grid>
+        </Frame>
+        
+        
+        <Label Text="Forgot Password" FontSize="Small" TextColor="Gray"></Label>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="SignInBtn" Text="Sign In" CornerRadius="15" Margin="5" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0"></Button>
+            <Button x:Name="RegisterBtn" Text="Create An Account" CornerRadius="15" Margin="5" Grid.Row="0" Grid.Column="1"></Button>
+        </Grid>
+        
+        
     </StackLayout>
 
 </ContentPage>
