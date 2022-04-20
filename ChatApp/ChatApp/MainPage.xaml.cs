@@ -14,5 +14,17 @@ namespace ChatApp
         {
             InitializeComponent();
         }
+        private async void SignIn_Clicked(object sender, EventArgs e)
+        {
+            await Application.Current.SavePropertiesAsync();
+
+            Application.Current.MainPage = new TabbedPage();
+        }
+        private async void Register_Clicked(object sender, EventArgs e)
+        {
+           await Application.Current.SavePropertiesAsync(); 
+
+           Application.Current.MainPage = new RegisterPage();
+        }
     }
 }

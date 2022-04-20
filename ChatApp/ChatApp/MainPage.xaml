@@ -5,11 +5,11 @@
              x:Class="ChatApp.MainPage">
 
     <StackLayout BackgroundColor="White">
-        <Frame BackgroundColor="Transparent" Padding="12" CornerRadius="0">
-            <Image x:Name="Logo" Source="Login" Aspect="AspectFill"></Image>
+        <Frame BackgroundColor="Transparent" Padding="12,24,12,0" CornerRadius="0">
+            <Image x:Name="Logo" Source="Login" Aspect="AspectFit" WidthRequest="240"></Image>
         </Frame>
         <StackLayout>
-            <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8">
+            <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
                 <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray">
                     <Entry.Triggers>
                         <Trigger TargetType="Entry" Property="IsFocused" Value="true">
@@ -18,9 +18,9 @@
                     </Entry.Triggers>
                 </Entry>
             </Frame>
-            <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10" CornerRadius="15" HasShadow="True" Padding="8">
+            <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,5" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
                 <Grid>
-                    <Entry Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray">
+                    <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray">
                         <Entry.Triggers>
                             <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                                 <!--<Setter Property="" Value=""></Setter>-->
@@ -28,26 +28,17 @@
                         </Entry.Triggers>
                     </Entry>
 
-                    <ImageButton VerticalOptions="Center"
-                     Margin="0,0,10,0"
-                     HeightRequest="20"
-                     HorizontalOptions="End"
-                     Source="ic_eye_hide"
-                     BackgroundColor="Transparent">
+                    <ImageButton VerticalOptions="Center" Margin="0,0,10,0" HeightRequest="20" HorizontalOptions="End" Source="ic_eye_hide" BackgroundColor="Transparent">
                         <ImageButton.Triggers>
                             <EventTrigger Event="Clicked">
-                                <local:ShowPasswordTriggerAction ShowIcon="ic_eye"
-                                                                    HideIcon="ic_eye_hide"
-                                                                    x:Name="ShowPasswordActualTrigger"/>
+                                <local:ShowPasswordTriggerAction ShowIcon="ic_eye" HideIcon="ic_eye_hide" x:Name="ShowPasswordActualTrigger"/>
                             </EventTrigger>
                         </ImageButton.Triggers>
                     </ImageButton>
-                    
                 </Grid>
             </Frame>
 
-
-            <Label Text="Forgot Password" FontSize="Small" TextColor="Gray" HorizontalTextAlignment="End" Margin="0,0,20,0"></Label>
+            <Label Text="Forgot Password" FontSize="Small" TextColor="Gray" HorizontalTextAlignment="End" Margin="0,0,20,40"></Label>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -56,27 +47,31 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="SignInBtn" Text="Sign In" CornerRadius="15" Margin="10,10,10,0" VerticalOptions="Center"
-                        HorizontalOptions="Fill" Grid.Row="0" BackgroundColor="#00529C"></Button>
-                <Button x:Name="RegisterBtn" Text="Create An Account" CornerRadius="15" Margin="10,0,10,0" VerticalOptions="Center"
-                        HorizontalOptions="Fill" Grid.Row="1" BackgroundColor="#01A7E3"></Button>
-            </Grid>
-            <Label Text="or" FontSize="Small"  TextColor="Gray" HorizontalTextAlignment="Center" Margin="0,-5,0,0"></Label>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Button x:Name="SignInGoogleBtn" Text="Sign in with Google" CornerRadius="15" Margin="10,0,0,10" VerticalOptions="Center"
-                        HorizontalOptions="Fill" Grid.Row="0" Grid.Column="0" BackgroundColor="White" FontSize="Micro"
-                        ImageSource="Google" ContentLayout="Left,0" TextColor="#00529C" BorderColor="#00529C" BorderWidth="1">
+                <Button x:Name="SignInBtn" Text="Sign In" CornerRadius="15" Margin="10,0,10,0" VerticalOptions="Center"
+                        HorizontalOptions="Fill" Grid.Row="0" BackgroundColor="#00529C" Clicked="SignIn_Clicked">
                 </Button>
-                <Button x:Name="SignInFacebookBtn" Text="Sign In with Facebook" CornerRadius="15" Margin="0,0,10,10" VerticalOptions="FillAndExpand"
+                <Button x:Name="RegisterBtn" Text="Create An Account" CornerRadius="15" Margin="10,0,10,0" VerticalOptions="Center"
+                        HorizontalOptions="Fill" Grid.Row="1" BackgroundColor="#01A7E3" Clicked="Register_Clicked">
+                </Button>
+            </Grid>
+            <Label Text="or" FontSize="Small"  TextColor="Gray" HorizontalTextAlignment="Center" Margin="0,10,0,5"></Label>
+            <Grid VerticalOptions="EndAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="SignInGoogleBtn" Text="Sign in with Google" CornerRadius="15" Margin="10,5,0,10" VerticalOptions="Center"
+                        HorizontalOptions="Fill" Grid.Row="0" Grid.Column="0" BackgroundColor="White" FontSize="Micro"
+                        ImageSource="Google" ContentLayout="Left,10" TextColor="#00529C" BorderColor="#00529C" BorderWidth="1"
+                        Padding="8">
+                </Button>
+                <Button x:Name="SignInFacebookBtn" Text="Sign In with Facebook" CornerRadius="15" Margin="0,5,10,10" VerticalOptions="FillAndExpand"
                         HorizontalOptions="Fill" Grid.Row="0" Grid.Column="1" BackgroundColor="White" FontSize="Micro"
-                        ImageSource="Facebook" ContentLayout="Left,20" TextColor="#00529C" BorderColor="#00529C" BorderWidth="1" >
+                        ImageSource="Facebook" ContentLayout="Left,20" TextColor="#00529C" BorderColor="#00529C" BorderWidth="1"
+                        Padding="8">
                 </Button>
             </Grid>
         </StackLayout>

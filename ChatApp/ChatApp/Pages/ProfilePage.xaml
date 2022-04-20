@@ -8,9 +8,27 @@
              Title="Profile Page">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout>
+                <Frame Padding="0,50,0,0" BackgroundColor="Transparent">
+                    <Image x:Name="Logo" Source="ProfileIconAlt" Aspect="AspectFit" WidthRequest="240"></Image>
+                </Frame>
+                
+                <Label x:Name="FNLabel" Text="Kimi No Nawa" FontSize="Title" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0,20,0,0"></Label>
+                <Label x:Name="EmailLabel" Text="kiminonawa@gmail.com" FontSize="Large" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0"></Label>
+            </StackLayout>
+            
+            <Grid VerticalOptions="EndAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="SignOutBtn" Text="Sign out" CornerRadius="15" Margin="10,0,10,20" VerticalOptions="Center"
+                        HorizontalOptions="Fill" Grid.Row="1" BackgroundColor="#00529C" Clicked="SignOutBtn_Clicked">
+                </Button>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

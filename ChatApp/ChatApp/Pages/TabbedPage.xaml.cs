@@ -12,12 +12,13 @@ using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 namespace ChatApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
     public partial class TabbedPage : Xamarin.Forms.TabbedPage
     {
         public TabbedPage()
         {
             InitializeComponent();
-            this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
+            this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(true);
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
         }
 
@@ -26,7 +27,7 @@ namespace ChatApp
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             email = email.Trim();
-            this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
+            this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(true);
 
         }
     }
