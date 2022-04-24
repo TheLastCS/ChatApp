@@ -19,14 +19,14 @@ namespace ChatApp
         {
             InitializeComponent();
             this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(true);
-            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         public TabbedPage(string email)
         {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            email = email.Trim();
+            profilePage.Email = email;
             this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(true);
 
         }

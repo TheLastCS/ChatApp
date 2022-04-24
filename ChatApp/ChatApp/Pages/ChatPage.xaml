@@ -7,10 +7,21 @@
              x:Name="chatPage"
              Title="Chat Page">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BackgroundColor="White">
+            <Frame Padding="-10,5,5,5" BackgroundColor="Transparent" Margin="10,10,10,10" BorderColor="#00529C" CornerRadius="15" >
+                <SearchBar x:Name="SearchEntry" Placeholder="Search for friends" Keyboard="Text" Margin="5" FontSize="Subtitle" TextColor="#000000"></SearchBar>
+            </Frame>
+
+            <Grid VerticalOptions="EndAndExpand" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="ContactLabel" Text="You have no contacts as of the moment" FontSize="Large" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0"></Label>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
