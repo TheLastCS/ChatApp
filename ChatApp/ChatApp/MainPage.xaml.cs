@@ -44,5 +44,10 @@ namespace ChatApp
 
            Application.Current.MainPage = new RegisterPage();
         }
+
+        private void ForgotPassword_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new ForgotPasswordPage());
+        }
     }
 }

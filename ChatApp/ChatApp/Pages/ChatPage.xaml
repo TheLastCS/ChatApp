@@ -9,7 +9,7 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="White">
             <Frame Padding="-10,5,5,5" BackgroundColor="Transparent" Margin="10,10,10,10" BorderColor="#00529C" CornerRadius="15" >
-                <SearchBar x:Name="SearchEntry" Placeholder="Search for friends" Keyboard="Text" Margin="5" FontSize="Subtitle" TextColor="#000000"></SearchBar>
+                <SearchBar x:Name="SearchEntry" Placeholder="Search for friends" Keyboard="Email" Margin="5" FontSize="Subtitle" TextColor="#000000"></SearchBar>
             </Frame>
 
             <Grid VerticalOptions="EndAndExpand" >
@@ -20,7 +20,30 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="ContactLabel" Text="You have no contacts as of the moment" FontSize="Large" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0"></Label>
+                <ListView x:Name="ContactsListView" SeparatorVisibility="None" HasUnevenRows="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1">
+                    <ListView.Header>
+                        <Label Text="List starts here.." TextColor="Black" HorizontalOptions="Fill"
+                           HorizontalTextAlignment="Center"/>
+                    </ListView.Header>
+                    <ListView.Footer>
+                        <Label Text="List ends here.." TextColor="Black" HorizontalOptions="Fill" 
+                           HorizontalTextAlignment="Center"/>
+                    </ListView.Footer>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Name}" TextColor="#01A7E3" FontSize="Small"></Label>
+                                        <Label Text="{Binding Email}" TextColor="#00529C" FontSize="Large"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Label x:Name="ContactLabel" Text="You have no contacts as of the moment" FontSize="Large" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0"
+                       Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

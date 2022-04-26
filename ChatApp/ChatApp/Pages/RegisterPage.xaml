@@ -13,7 +13,7 @@
             </Frame>
             <StackLayout>
                 <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,0,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
-                    <Entry x:Name="UsernameEntry" Placeholder="Username" Keyboard="Default" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray">
+                    <Entry x:Name="UsernameEntry" Placeholder="Username" Keyboard="Default" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray" ReturnType="Next">
                         <Entry.Triggers>
                             <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                                 <!--<Setter Property="" Value=""></Setter>-->
@@ -22,7 +22,7 @@
                     </Entry>
                 </Frame>
                 <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
-                    <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray">
+                    <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray" ReturnType="Next">
                         <Entry.Triggers>
                             <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                                 <!--<Setter Property="" Value=""></Setter>-->
@@ -32,7 +32,7 @@
                 </Frame>
                 <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
                     <Grid>
-                        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray">
+                        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray" ReturnType="Next">
                             <Entry.Triggers>
                                 <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                                     <!--<Setter Property="" Value=""></Setter>-->
@@ -51,7 +51,7 @@
                 </Frame>
                 <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
                     <Grid>
-                        <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="{Binding Source={x:Reference ShowConfirmPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray">
+                        <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="{Binding Source={x:Reference ShowConfirmPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray" ReturnType="Done">
                             <Entry.Triggers>
                                 <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                                     <!--<Setter Property="" Value=""></Setter>-->
@@ -77,9 +77,21 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="RegisterBtn" Text="Sign Up" CornerRadius="15" Margin="10,10,10,0" VerticalOptions="Center"
+                    <local:CustomButton x:Name="RegisterBtn" Text="Sign Up" CornerRadius="15" Margin="10,10,10,0" VerticalOptions="Center"
                         HorizontalOptions="Fill" Grid.Row="0" BackgroundColor="#00529C" Clicked="Register_Clicked">
-                    </Button>
+                        <local:CustomButton.Triggers>
+                            <MultiTrigger TargetType="local:CustomButton" >
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Source={x:Reference UsernameEntry},Path=Text.Length}" Value="0"/>
+                                    <BindingCondition Binding="{Binding Source={x:Reference EmailEntry},Path=Text.Length}" Value="0"/>
+                                    <BindingCondition Binding="{Binding Source={x:Reference PasswordEntry},Path=Text.Length}" Value="0"/>
+                                    <BindingCondition Binding="{Binding Source={x:Reference ConfirmPasswordEntry},Path=Text.Length}" Value="0"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="False" />
+                                <Setter Property="BackgroundColor" Value="Gray" />
+                            </MultiTrigger>
+                        </local:CustomButton.Triggers>
+                    </local:CustomButton>
                     <Button x:Name="SignInBtn" Text="Sign In To Your Account" CornerRadius="15" Margin="10,0,10,0" VerticalOptions="Center"
                         HorizontalOptions="Fill" Grid.Row="1" BackgroundColor="#01A7E3" Clicked="SignIn_Clicked">
                     </Button>
