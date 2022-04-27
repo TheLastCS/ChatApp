@@ -48,7 +48,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <local:CustomButton x:Name="SignInBtn" Text="SIGN IN" CornerRadius="15" Margin="10,0,10,0" VerticalOptions="Center"
-                        HorizontalOptions="Fill" Grid.Row="0" BackgroundColor="#00529C" Clicked="SignIn_Clicked">
+                        HorizontalOptions="Fill" Grid.Row="0" BackgroundColor="#00529C" Clicked="SignIn_Clicked" TextColor="White">
                     <local:CustomButton.Triggers>
                         <MultiTrigger TargetType="local:CustomButton" >
                             <MultiTrigger.Conditions>
@@ -61,7 +61,7 @@
                     </local:CustomButton.Triggers>
                 </local:CustomButton>
                 <Button x:Name="RegisterBtn" Text="Create An Account" CornerRadius="15" Margin="10,0,10,0" VerticalOptions="Center"
-                        HorizontalOptions="Fill" Grid.Row="1" BackgroundColor="#01A7E3" Clicked="Register_Clicked">
+                        HorizontalOptions="Fill" Grid.Row="1" BackgroundColor="#01A7E3" Clicked="Register_Clicked" TextColor="White">
                 </Button>
             </Grid>
             <Label Text="or" FontSize="Small"  TextColor="Gray" HorizontalTextAlignment="Center" Margin="0,10,0,5" >
