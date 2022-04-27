@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ChatApp"
-             x:Class="ChatApp.MainPage">
+             x:Class="ChatApp.MainPage"
+             xmlns:custom="clr-namespace:ChatApp">
 
     <StackLayout BackgroundColor="White">
         <Frame BackgroundColor="Transparent" Padding="12,24,12,0" CornerRadius="0">
@@ -18,15 +19,15 @@
                     </Entry.Triggers>
                 </Entry>
             </Frame>
-            <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,5" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
+            <Frame BackgroundColor="Transparent"  Margin="10,5,10,5" HasShadow="True" Padding="8,0,4,0">
                 <Grid>
-                    <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" ReturnType="Done" TextColor="#00529C" PlaceholderColor="Gray">
+                    <local:CustomEntry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}"  CornerRadius="15" ReturnType="Done" TextColor="#00529C" PlaceholderColor="Gray">
                         <Entry.Triggers>
                             <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                                 <!--<Setter Property="" Value=""></Setter>-->
                             </Trigger>
                         </Entry.Triggers>
-                    </Entry>
+                    </local:CustomEntry>
 
                     <ImageButton VerticalOptions="Center" Margin="0,0,10,0" HeightRequest="20" HorizontalOptions="End" Source="ic_eye_hide" BackgroundColor="Transparent">
                         <ImageButton.Triggers>
