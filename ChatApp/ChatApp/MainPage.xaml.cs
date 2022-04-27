@@ -24,11 +24,11 @@ namespace ChatApp
                 Application.Current.Properties["email"] = EmailEntry.Text;
                 Application.Current.Properties["password"] = PasswordEntry.Text;
                 await Application.Current.SavePropertiesAsync();
-
                 Application.Current.MainPage = new TabbedPage(EmailEntry.Text);
             } else
             {
-                bool retryBool = await DisplayAlert("Error", "Missing Fields. Please Enter Your Login Information.", "Okay", null);
+                Console.WriteLine("Hello");
+                bool retryBool = await DisplayAlert("Error", "Missing Fields. Please Enter Your Login Information.", "Okay", "Cancel");
                 if (retryBool)
                 {
                     EmailEntry.Text = string.Empty;
@@ -36,12 +36,10 @@ namespace ChatApp
                     EmailEntry.Focus();
                 }
             }
-            
         }
         private async void Register_Clicked(object sender, EventArgs e)
         {
-           await Application.Current.SavePropertiesAsync(); 
-
+           await Application.Current.SavePropertiesAsync();
            Application.Current.MainPage = new RegisterPage();
         }
 

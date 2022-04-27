@@ -77,7 +77,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <local:CustomButton x:Name="RegisterBtn" Text="Sign Up" CornerRadius="15" Margin="10,10,10,0" VerticalOptions="Center"
+                    <local:CustomButton x:Name="RegisterBtn" Text="SIGN UP" CornerRadius="15" Margin="10,10,10,0" VerticalOptions="Center"
                         HorizontalOptions="Fill" Grid.Row="0" BackgroundColor="#00529C" Clicked="Register_Clicked">
                         <local:CustomButton.Triggers>
                             <MultiTrigger TargetType="local:CustomButton" >

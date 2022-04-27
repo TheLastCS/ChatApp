@@ -9,5 +9,5 @@
             x:Class="ChatApp.TabbedPage">
     <!--Pages can be added as references or inline-->
     <local:ChatPage Title="Chat" IconImageSource="Chat" Padding="5"/>
-    <local:ProfilePage Title="Profile" IconImageSource="Profile" BackgroundColor="White" Padding="5"/>
+    <local:ProfilePage Title="Profile" IconImageSource="Profile" BackgroundColor="White" Padding="5" x:Name="profilePage"/>
 </TabbedPage>
