@@ -1,45 +1,63 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using ChatApp;
-using ChatApp.Droid.CustomRenderers;
+using ChatApp.Droid;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(CustomEntry), typeof(CustomEntryRenderer))]
-
-namespace ChatApp.Droid.CustomRenderers
+[assembly: ExportRenderer (typeof(CustomEntry), typeof(CustomEntryRenderer))]
+namespace ChatApp.Droid
 {
     public class CustomEntryRenderer : EntryRenderer
     {
-        CustomEntry entry;
+
         public CustomEntryRenderer(Context context) : base(context)
         {
         }
+
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
             base.OnElementChanged(e);
-            entry = Element as CustomEntry;
+            if (e.NewElement != null)
+            {
+                var view = (CustomEntry)Element;
+                if (view.IsCurvedCornersEnabled)
+                {
+                    // creating gradient drawable for the curved background  
+                    var _gradientBackground = new GradientDrawable();
+                    _gradientBackground.SetShape(ShapeType.Rectangle);
+                    _gradientBackground.SetColor(view.BackgroundColor.ToAndroid());
+
+                    // Thickness of the stroke line  
+                    _gradientBackground.SetStroke(view.BorderWidth, view.BorderColor.ToAndroid());
+
+                    // Radius for the curves  
+                    _gradientBackground.SetCornerRadius(
+                        DpToPixels(this.Context, Convert.ToSingle(view.CornerRadius)));
+
+                    // set the background of the   
+                    Control.SetBackground(_gradientBackground);
+                }
+                // Set padding for the internal text from border  
+                Control.SetPadding(
+                    (int)DpToPixels(this.Context, Convert.ToSingle(12)), Control.PaddingTop,
+                    (int)DpToPixels(this.Context, Convert.ToSingle(12)), Control.PaddingBottom);
+            }
         }
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public static float DpToPixels(Context context, float valueInDp)
         {
-            base.OnElementPropertyChanged(sender, e);
-            var nativeEditText = (EditText)Control;
-            var shape = new ShapeDrawable(new Android.Graphics.Drawables.Shapes.RectShape());
-            shape.Paint.Color = entry.BorderColor.ToAndroid(); //entry.BorderColor is the 'BorderColor' property of the custom entry class
-            shape.Paint.SetStyle(Paint.Style.Stroke);
-            shape.Paint.StrokeWidth = 10;
-            nativeEditText.Background = shape;
+            DisplayMetrics metrics = context.Resources.DisplayMetrics;
+            return TypedValue.ApplyDimension(ComplexUnitType.Dip, valueInDp, metrics);
         }
     }
 }

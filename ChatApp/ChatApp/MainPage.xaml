@@ -2,16 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ChatApp"
-             x:Class="ChatApp.MainPage"
-             xmlns:custom="clr-namespace:ChatApp">
+             x:Class="ChatApp.MainPage">
 
     <StackLayout BackgroundColor="White">
         <Frame BackgroundColor="Transparent" Padding="12,24,12,0" CornerRadius="0">
             <Image x:Name="Logo" Source="Login" Aspect="AspectFit" WidthRequest="240"></Image>
         </Frame>
         <StackLayout>
-            <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
-                <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray" ReturnType="Next">
+            <Frame BackgroundColor="Transparent" x:Name="EmailFrame" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
+                <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="#00529C" Style="{DynamicResource EntryStyle}" IsFocused ="{Binding Email}"  PlaceholderColor="Gray" ReturnType="Next">
                     <Entry.Triggers>
                         <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                             <!--<Setter Property="" Value=""></Setter>-->
@@ -19,15 +18,15 @@
                     </Entry.Triggers>
                 </Entry>
             </Frame>
-            <Frame BackgroundColor="Transparent"  Margin="10,5,10,5" HasShadow="True" Padding="8,0,4,0">
+            <Frame BackgroundColor="Transparent" x:Name="PasswordFrame" BorderColor="#00529C" Margin="10,5,10,5" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
                 <Grid>
-                    <local:CustomEntry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}"  CornerRadius="15" ReturnType="Done" TextColor="#00529C" PlaceholderColor="Gray">
+                    <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" ReturnType="Done" TextColor="#00529C" PlaceholderColor="Gray">
                         <Entry.Triggers>
                             <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                                 <!--<Setter Property="" Value=""></Setter>-->
                             </Trigger>
                         </Entry.Triggers>
-                    </local:CustomEntry>
+                    </Entry>
 
                     <ImageButton VerticalOptions="Center" Margin="0,0,10,0" HeightRequest="20" HorizontalOptions="End" Source="ic_eye_hide" BackgroundColor="Transparent">
                         <ImageButton.Triggers>

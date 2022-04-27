@@ -16,6 +16,15 @@ namespace ChatApp
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             EmailEntry.Text = "admin@gmail.com";
             PasswordEntry.Text = "admin";
+            EmailEntry.Focused += (s, a) =>
+            {
+                EmailFrame.BorderColor = Color.FromHex("#00529C");
+            };
+
+            PasswordEntry.Focused += (s, a) =>
+            {
+                PasswordFrame.BorderColor = Color.FromHex("#00529C");
+            };
         }
         private async void SignIn_Clicked(object sender, EventArgs e)
         {
@@ -33,7 +42,8 @@ namespace ChatApp
                 {
                     EmailEntry.Text = string.Empty;
                     PasswordEntry.Text = string.Empty;
-                    EmailEntry.Focus();
+                    EmailFrame.BorderColor = Color.Red;
+                    PasswordFrame.BorderColor = Color.Red;                  
                 }
             }
         }
@@ -47,5 +57,6 @@ namespace ChatApp
         {
             Navigation.PushModalAsync(new ForgotPasswordPage());
         }
+
     }
 }
