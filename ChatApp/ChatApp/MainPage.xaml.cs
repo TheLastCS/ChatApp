@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using ChatApp.ViewModels;
 
 namespace ChatApp
 {
@@ -13,8 +14,9 @@ namespace ChatApp
         public MainPage()
         {
             InitializeComponent();
-            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            EmailEntry.Text = "admin@gmail.com";
+            this.BindingContext = new MainPageViewModel(this);
+            NavigationPage.SetHasNavigationBar(this, false);
+            EmailEntry.Text = "admin@gmail";
             PasswordEntry.Text = "admin";
             EmailEntry.Focused += (s, a) =>
             {
@@ -30,21 +32,26 @@ namespace ChatApp
         {
             if(!string.IsNullOrEmpty(EmailEntry.Text) && !string.IsNullOrEmpty(PasswordEntry.Text))
             {
-                Application.Current.Properties["email"] = EmailEntry.Text;
-                Application.Current.Properties["password"] = PasswordEntry.Text;
-                await Application.Current.SavePropertiesAsync();
-                Application.Current.MainPage = new TabbedPage(EmailEntry.Text);
+                if(EmailEntry.Text == "admin@gmail.com" && PasswordEntry.Text == "admin")
+                {
+                    Application.Current.Properties["email"] = EmailEntry.Text;
+                    Application.Current.Properties["password"] = PasswordEntry.Text;
+                    await Application.Current.SavePropertiesAsync();
+                    Application.Current.MainPage = new TabbedPage(EmailEntry.Text);
+                }
+                
             } else
             {
-                Console.WriteLine("Hello");
-                bool retryBool = await DisplayAlert("Error", "Missing Fields. Please Enter Your Login Information.", "Okay", "Cancel");
-                if (retryBool)
-                {
-                    EmailEntry.Text = string.Empty;
-                    PasswordEntry.Text = string.Empty;
-                    EmailFrame.BorderColor = Color.Red;
-                    PasswordFrame.BorderColor = Color.Red;                  
-                }
+                EmailFrame.BorderColor = Color.Red;
+                PasswordFrame.BorderColor = Color.Red;
+
+                await DisplayAlert("Error", "Missing Fields. Please Enter Your Login Information.", "OKAY");
+                
+                EmailEntry.Text = string.Empty;
+                PasswordEntry.Text = string.Empty;
+                    
+
+                //EmailEntry.Focus();
             }
         }
         private async void Register_Clicked(object sender, EventArgs e)

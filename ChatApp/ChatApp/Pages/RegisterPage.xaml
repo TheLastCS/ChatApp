@@ -7,116 +7,119 @@
              x:Name="registerPage"
              Title="Register Page">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
-            <Frame BackgroundColor="Transparent" Padding="12,24,12,0" CornerRadius="0">
-                <Image x:Name="Logo" Source="Login" Aspect="AspectFit" WidthRequest="220"></Image>
-            </Frame>
-            <StackLayout>
-                <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,0,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
-                    <Entry x:Name="UsernameEntry" Placeholder="Username" Keyboard="Default" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray" ReturnType="Next">
-                        <Entry.Triggers>
-                            <Trigger TargetType="Entry" Property="IsFocused" Value="true">
-                                <!--<Setter Property="" Value=""></Setter>-->
-                            </Trigger>
-                        </Entry.Triggers>
-                    </Entry>
+        <ScrollView>
+            <StackLayout BackgroundColor="White">
+                <Frame BackgroundColor="Transparent" Padding="12,24,12,0" CornerRadius="0">
+                    <Image x:Name="Logo" Source="Login" Aspect="AspectFit" WidthRequest="220"></Image>
                 </Frame>
-                <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
-                    <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray" ReturnType="Next">
-                        <Entry.Triggers>
-                            <Trigger TargetType="Entry" Property="IsFocused" Value="true">
-                                <!--<Setter Property="" Value=""></Setter>-->
-                            </Trigger>
-                        </Entry.Triggers>
-                    </Entry>
-                </Frame>
-                <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
-                    <Grid>
-                        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray" ReturnType="Next">
+                <StackLayout>
+                    <Frame x:Name="UsernameFrame" BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,0,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
+                        <Entry x:Name="UsernameEntry" Placeholder="Username" Keyboard="Default" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray" ReturnType="Next">
                             <Entry.Triggers>
                                 <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                                     <!--<Setter Property="" Value=""></Setter>-->
                                 </Trigger>
                             </Entry.Triggers>
                         </Entry>
-
-                        <ImageButton VerticalOptions="Center" Margin="0,0,10,0" HeightRequest="20" HorizontalOptions="End" Source="ic_eye_hide" BackgroundColor="Transparent">
-                            <ImageButton.Triggers>
-                                <EventTrigger Event="Clicked">
-                                    <local:ShowPasswordTriggerAction ShowIcon="ic_eye" HideIcon="ic_eye_hide" x:Name="ShowPasswordActualTrigger"/>
-                                </EventTrigger>
-                            </ImageButton.Triggers>
-                        </ImageButton>
-                    </Grid>
-                </Frame>
-                <Frame BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
-                    <Grid>
-                        <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="{Binding Source={x:Reference ShowConfirmPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray" ReturnType="Done">
+                    </Frame>
+                    <Frame x:Name="EmailFrame" BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
+                        <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray" ReturnType="Next">
                             <Entry.Triggers>
                                 <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                                     <!--<Setter Property="" Value=""></Setter>-->
                                 </Trigger>
                             </Entry.Triggers>
                         </Entry>
+                    </Frame>
+                    <Frame x:Name="PasswordFrame" BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
+                        <Grid>
+                            <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray" ReturnType="Next">
+                                <Entry.Triggers>
+                                    <Trigger TargetType="Entry" Property="IsFocused" Value="true">
+                                        <!--<Setter Property="" Value=""></Setter>-->
+                                    </Trigger>
+                                </Entry.Triggers>
+                            </Entry>
 
-                        <ImageButton VerticalOptions="Center" Margin="0,0,10,0" HeightRequest="20" HorizontalOptions="End" Source="ic_eye_hide" BackgroundColor="Transparent">
-                            <ImageButton.Triggers>
-                                <EventTrigger Event="Clicked">
-                                    <local:ShowPasswordTriggerAction ShowIcon="ic_eye" HideIcon="ic_eye_hide" x:Name="ShowConfirmPasswordActualTrigger"/>
-                                </EventTrigger>
-                            </ImageButton.Triggers>
-                        </ImageButton>
-                    </Grid>
-                </Frame>
+                            <ImageButton VerticalOptions="Center" Margin="0,0,10,0" HeightRequest="20" HorizontalOptions="End" Source="ic_eye_hide" BackgroundColor="Transparent">
+                                <ImageButton.Triggers>
+                                    <EventTrigger Event="Clicked">
+                                        <local:ShowPasswordTriggerAction ShowIcon="ic_eye" HideIcon="ic_eye_hide" x:Name="ShowPasswordActualTrigger"/>
+                                    </EventTrigger>
+                                </ImageButton.Triggers>
+                            </ImageButton>
+                        </Grid>
+                    </Frame>
+                    <Frame x:Name="ConfirmPasswordFrame" BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
+                        <Grid>
+                            <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="{Binding Source={x:Reference ShowConfirmPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray" ReturnType="Done">
+                                <Entry.Triggers>
+                                    <Trigger TargetType="Entry" Property="IsFocused" Value="true">
+                                        <!--<Setter Property="" Value=""></Setter>-->
+                                    </Trigger>
+                                </Entry.Triggers>
+                            </Entry>
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <local:CustomButton x:Name="RegisterBtn" Text="SIGN UP" CornerRadius="15" Margin="10,10,10,0" VerticalOptions="Center"
-                        HorizontalOptions="Fill" Grid.Row="0" BackgroundColor="#00529C" Clicked="Register_Clicked">
-                        <local:CustomButton.Triggers>
-                            <MultiTrigger TargetType="local:CustomButton" >
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Source={x:Reference UsernameEntry},Path=Text.Length}" Value="0"/>
-                                    <BindingCondition Binding="{Binding Source={x:Reference EmailEntry},Path=Text.Length}" Value="0"/>
-                                    <BindingCondition Binding="{Binding Source={x:Reference PasswordEntry},Path=Text.Length}" Value="0"/>
-                                    <BindingCondition Binding="{Binding Source={x:Reference ConfirmPasswordEntry},Path=Text.Length}" Value="0"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="IsEnabled" Value="False" />
-                                <Setter Property="BackgroundColor" Value="Gray" />
-                            </MultiTrigger>
-                        </local:CustomButton.Triggers>
-                    </local:CustomButton>
-                    <Button x:Name="SignInBtn" Text="Sign In To Your Account" CornerRadius="15" Margin="10,0,10,0" VerticalOptions="Center"
-                        HorizontalOptions="Fill" Grid.Row="1" BackgroundColor="#01A7E3" Clicked="SignIn_Clicked">
-                    </Button>
-                </Grid>
-                <Label Text="or" FontSize="Small"  TextColor="Gray" HorizontalTextAlignment="Center" Margin="0,-5,0,0"></Label>
-                <Grid VerticalOptions="EndAndExpand">
-                    <Grid.RowDefinitions>
+                            <ImageButton VerticalOptions="Center" Margin="0,0,10,0" HeightRequest="20" HorizontalOptions="End" Source="ic_eye_hide" BackgroundColor="Transparent">
+                                <ImageButton.Triggers>
+                                    <EventTrigger Event="Clicked">
+                                        <local:ShowPasswordTriggerAction ShowIcon="ic_eye" HideIcon="ic_eye_hide" x:Name="ShowConfirmPasswordActualTrigger"/>
+                                    </EventTrigger>
+                                </ImageButton.Triggers>
+                            </ImageButton>
+                        </Grid>
+                    </Frame>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <local:CustomButton x:Name="RegisterBtn" Text="SIGN UP" CornerRadius="15" Margin="10,10,10,0" VerticalOptions="Center"
+                        HorizontalOptions="Fill" Grid.Row="0" BackgroundColor="#00529C" Clicked="Register_Clicked" TextColor="White">
+                            <local:CustomButton.Triggers>
+                                <MultiTrigger TargetType="local:CustomButton" >
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Source={x:Reference UsernameEntry},Path=Text.Length}" Value="0"/>
+                                        <BindingCondition Binding="{Binding Source={x:Reference EmailEntry},Path=Text.Length}" Value="0"/>
+                                        <BindingCondition Binding="{Binding Source={x:Reference PasswordEntry},Path=Text.Length}" Value="0"/>
+                                        <BindingCondition Binding="{Binding Source={x:Reference ConfirmPasswordEntry},Path=Text.Length}" Value="0"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="False" />
+                                    <Setter Property="BackgroundColor" Value="Gray" />
+                                </MultiTrigger>
+                            </local:CustomButton.Triggers>
+                        </local:CustomButton>
+                        <Button x:Name="SignInBtn" Text="Sign In To Your Account" CornerRadius="15" Margin="10,0,10,0" VerticalOptions="Center"
+                        HorizontalOptions="Fill" Grid.Row="1" BackgroundColor="#01A7E3" Clicked="SignIn_Clicked" TextColor="White">
+                        </Button>
+                    </Grid>
+                    <Label Text="or" FontSize="Small"  TextColor="Gray" HorizontalTextAlignment="Center" Margin="0,-5,0,0"></Label>
+                    <Grid VerticalOptions="EndAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="SignUpGoogleBtn" Text="Sign up with Google" CornerRadius="15" Margin="10,0,0,10" VerticalOptions="Center"
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="SignUpGoogleBtn" Text="Sign up with Google" CornerRadius="15" Margin="10,0,0,10" VerticalOptions="Center"
                             HorizontalOptions="Fill" Grid.Row="0" Grid.Column="0" BackgroundColor="White" FontSize="Micro"
                             ImageSource="Google" ContentLayout="Left,0" TextColor="#00529C" BorderColor="#00529C" BorderWidth="1"
-                            Padding="8">
-                    </Button>
-                    <Button x:Name="SignUpFacebookBtn" Text="Sign up with Facebook" CornerRadius="15" Margin="0,0,10,10" VerticalOptions="FillAndExpand"
+                            Padding="8" Clicked="Register_Clicked">
+                        </Button>
+                        <Button x:Name="SignUpFacebookBtn" Text="Sign up with Facebook" CornerRadius="15" Margin="0,0,10,10" VerticalOptions="FillAndExpand"
                             HorizontalOptions="Fill" Grid.Row="0" Grid.Column="1" BackgroundColor="White" FontSize="Micro"
                             ImageSource="Facebook" ContentLayout="Left,20" TextColor="#00529C" BorderColor="#00529C" BorderWidth="1" 
-                            Padding="8">
-                    </Button>
-                </Grid>
+                            Padding="8" Clicked="SignIn_Clicked">
+                        </Button>
+                    </Grid>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
+        
     </ContentPage.Content>
 </ContentPage>

@@ -10,7 +10,8 @@
         </Frame>
         <StackLayout>
             <Frame BackgroundColor="Transparent" x:Name="EmailFrame" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
-                <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="#00529C" Style="{DynamicResource EntryStyle}" IsFocused ="{Binding Email}"  PlaceholderColor="Gray" ReturnType="Next">
+                <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="#00529C" Style="{DynamicResource EntryStyle}" IsFocused ="{Binding Email}" PlaceholderColor="Gray" ReturnType="Next" MaxLength="32"
+                       Text="{Binding LoginModel.Email}">
                     <Entry.Triggers>
                         <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                             <!--<Setter Property="" Value=""></Setter>-->
@@ -18,9 +19,12 @@
                     </Entry.Triggers>
                 </Entry>
             </Frame>
+            <Label x:Name="LoginModel_EmailError" 
+        IsVisible="False" TextColor="Red" Margin="15,0,0,-15"/>
             <Frame BackgroundColor="Transparent" x:Name="PasswordFrame" BorderColor="#00529C" Margin="10,5,10,5" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
                 <Grid>
-                    <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" ReturnType="Done" TextColor="#00529C" PlaceholderColor="Gray">
+                    <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" ReturnType="Done" TextColor="#00529C" PlaceholderColor="Gray" MaxLength="24"
+                           Text="{Binding LoginModel.Password}">
                         <Entry.Triggers>
                             <Trigger TargetType="Entry" Property="IsFocused" Value="true">
                                 <!--<Setter Property="" Value=""></Setter>-->
@@ -37,8 +41,14 @@
                     </ImageButton>
                 </Grid>
             </Frame>
+            <Label x:Name="LoginModel_PasswordError" 
+        IsVisible="False" TextColor="Red"  Margin="15,0,0,-15"/>
 
-            <Label Text="Forgot Password" FontSize="Small" TextColor="Gray" HorizontalTextAlignment="End" Margin="0,0,20,40"></Label>
+            <Label Text="Forgot Password" FontSize="Small" TextColor="Gray" HorizontalTextAlignment="End" Margin="0,0,20,40">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ForgotPassword_Tapped"></TapGestureRecognizer>
+                </Label.GestureRecognizers>
+            </Label>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -48,7 +58,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <local:CustomButton x:Name="SignInBtn" Text="SIGN IN" CornerRadius="15" Margin="10,0,10,0" VerticalOptions="Center"
-                        HorizontalOptions="Fill" Grid.Row="0" BackgroundColor="#00529C" Clicked="SignIn_Clicked" TextColor="White">
+                        HorizontalOptions="Fill" Grid.Row="0" BackgroundColor="#00529C" Clicked="SignIn_Clicked" TextColor="White" Command="{Binding LoginCommand}">
                     <local:CustomButton.Triggers>
                         <MultiTrigger TargetType="local:CustomButton" >
                             <MultiTrigger.Conditions>
@@ -65,9 +75,6 @@
                 </Button>
             </Grid>
             <Label Text="or" FontSize="Small"  TextColor="Gray" HorizontalTextAlignment="Center" Margin="0,10,0,5" >
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="ForgotPassword_Tapped"></TapGestureRecognizer>
-                </Label.GestureRecognizers>
             </Label>
             <Grid VerticalOptions="EndAndExpand">
                 <Grid.RowDefinitions>

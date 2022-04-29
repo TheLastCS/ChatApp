@@ -26,7 +26,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <local:CustomButton x:Name="SignOutBtn" Text="Sign out" CornerRadius="15" Margin="10,0,10,20" VerticalOptions="Center"
+                <local:CustomButton x:Name="SignOutBtn" Text="SIGN OUT" CornerRadius="15" Margin="10,0,10,20" VerticalOptions="Center"
                         HorizontalOptions="Fill" Grid.Row="1" BackgroundColor="#00529C" Clicked="SignOutBtn_Clicked"> 
                 </local:CustomButton>
             </Grid>

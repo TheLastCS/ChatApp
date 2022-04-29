@@ -43,7 +43,7 @@ namespace ChatApp.Helpers
                         return convertedValue.ScaleHeight() - (Device.RuntimePlatform == Device.iOS ? 0.5 : 0);
                 }
 
-                throw new InvalidOperationException($"[{parameter.ToString()}] is an Invalid parameters. Supported parameters are height, width, thickness, fontSize, absolute-WH, absolute-NONE");
+                throw new InvalidOperationException($"[{parameter}] is an Invalid parameters. Supported parameters are height, width, thickness, fontSize, absolute-WH, absolute-NONE");
             }
 
             // default
@@ -62,12 +62,11 @@ namespace ChatApp.Helpers
 
         object ConvertToThicknessProperty(string param)
         {
-            double l, t, r, b;
             string[] thickness = param.Split(',');
 
             if (thickness.Length == 4)
             {
-                if (double.TryParse(thickness[0], NumberStyles.Number, CultureInfo.InvariantCulture, out l) && double.TryParse(thickness[1], NumberStyles.Number, CultureInfo.InvariantCulture, out t) && double.TryParse(thickness[2], NumberStyles.Number, CultureInfo.InvariantCulture, out r) && double.TryParse(thickness[3], NumberStyles.Number, CultureInfo.InvariantCulture, out b))
+                if (double.TryParse(thickness[0], NumberStyles.Number, CultureInfo.InvariantCulture, out double l) && double.TryParse(thickness[1], NumberStyles.Number, CultureInfo.InvariantCulture, out double t) && double.TryParse(thickness[2], NumberStyles.Number, CultureInfo.InvariantCulture, out double r) && double.TryParse(thickness[3], NumberStyles.Number, CultureInfo.InvariantCulture, out double b))
                 {
                     return new Thickness(l * (App.screenWidth / 320.0), t * (App.screenHeight / 568.0), r * (App.screenWidth / 320.0), b * (App.screenHeight / 568.0));
                 }
@@ -78,13 +77,12 @@ namespace ChatApp.Helpers
         object ConvertToPlatformThicknessProperty(string param)
         {
             string[] paramPlatform = param.Split('|');
-            double l, t, r, b;
             string[] thickness = Device.RuntimePlatform == Device.Android ? paramPlatform[0].Split(',') : paramPlatform[1].Split(',');
 
 
             if (thickness.Length == 4)
             {
-                if (double.TryParse(thickness[0], NumberStyles.Number, CultureInfo.InvariantCulture, out l) && double.TryParse(thickness[1], NumberStyles.Number, CultureInfo.InvariantCulture, out t) && double.TryParse(thickness[2], NumberStyles.Number, CultureInfo.InvariantCulture, out r) && double.TryParse(thickness[3], NumberStyles.Number, CultureInfo.InvariantCulture, out b))
+                if (double.TryParse(thickness[0], NumberStyles.Number, CultureInfo.InvariantCulture, out double l) && double.TryParse(thickness[1], NumberStyles.Number, CultureInfo.InvariantCulture, out double t) && double.TryParse(thickness[2], NumberStyles.Number, CultureInfo.InvariantCulture, out double r) && double.TryParse(thickness[3], NumberStyles.Number, CultureInfo.InvariantCulture, out double b))
                 {
                     return new Thickness(l * (App.screenWidth / 320.0), t * (App.screenHeight / 568.0), r * (App.screenWidth / 320.0), b * (App.screenHeight / 568.0));
                 }

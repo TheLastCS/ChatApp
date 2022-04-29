@@ -15,8 +15,32 @@ namespace ChatApp
         public RegisterPage()
         {
             InitializeComponent();
+
+            UsernameEntry.Text = "admin";
+            EmailEntry.Text = "admin@gmail.com";
+            PasswordEntry.Text = "admin";
+            ConfirmPasswordEntry.Text = "admin";
+
+            EmailEntry.Focused += (s, a) =>
+            {
+                UsernameFrame.BorderColor = Color.FromHex("#00529C");
+            };
+            EmailEntry.Focused += (s, a) =>
+            {
+                EmailFrame.BorderColor = Color.FromHex("#00529C");
+            };
+
+            PasswordEntry.Focused += (s, a) =>
+            {
+                PasswordFrame.BorderColor = Color.FromHex("#00529C");
+            };
+
+            ConfirmPasswordEntry.Focused += (s, a) =>
+            {
+                ConfirmPasswordFrame.BorderColor = Color.FromHex("#00529C");
+            };
         }
-        private async void SignIn_Clicked(object sender, EventArgs e)
+        private async void Register_Clicked(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(UsernameEntry.Text) &&  !string.IsNullOrEmpty(EmailEntry.Text) && !string.IsNullOrEmpty(PasswordEntry.Text) && !string.IsNullOrEmpty(ConfirmPasswordEntry.Text))
             {
@@ -31,18 +55,22 @@ namespace ChatApp
             }
             else
             {
-                bool retryBool = await DisplayAlert("Error", "Missing Fields. Please Enter Your Login Information.", "Okay", null);
-                if (retryBool)
-                {
-                    UsernameEntry.Text = string.Empty;
-                    EmailEntry.Text = string.Empty;
-                    PasswordEntry.Text = string.Empty;
-                    ConfirmPasswordEntry.Text = string.Empty;
-                    UsernameEntry.Focus();
-                }
+                UsernameFrame.BorderColor = Color.Red;
+                EmailFrame.BorderColor = Color.Red;
+                PasswordFrame.BorderColor = Color.Red;
+                ConfirmPasswordFrame.BorderColor = Color.Red;
+
+                await DisplayAlert("Error", "Missing Fields. Please Enter Your Information.", "OKAY");
+                
+                UsernameEntry.Text = string.Empty;
+                EmailEntry.Text = string.Empty;
+                PasswordEntry.Text = string.Empty;
+                ConfirmPasswordEntry.Text = string.Empty;
+
+                //UsernameEntry.Focus();
             }
         }
-        private async void Register_Clicked(object sender, EventArgs e)
+        private async void SignIn_Clicked(object sender, EventArgs e)
         {
             await Application.Current.SavePropertiesAsync();
 

@@ -7,6 +7,7 @@
              x:Name="chatPage"
              Title="Chat Page">
     <ContentPage.Content>
+
         <StackLayout BackgroundColor="White">
             <Frame Padding="-10,5,5,5" BackgroundColor="Transparent" Margin="10,10,10,10" BorderColor="#00529C" CornerRadius="15" >
                 <SearchBar x:Name="SearchEntry" Placeholder="Search for friends" Keyboard="Email" Margin="5" FontSize="Subtitle" TextColor="#000000"></SearchBar>
