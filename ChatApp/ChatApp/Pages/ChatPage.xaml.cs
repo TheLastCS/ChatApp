@@ -1,5 +1,6 @@
 ﻿using ChatApp.Helpers;
 using ChatApp.Models;
+using ChatApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -57,6 +58,13 @@ namespace ChatApp
                 ContactsListView.IsVisible = true;
             }
             ViewContactList();
+            ContactsListView.ItemTapped += async (object sender, ItemTappedEventArgs e) =>
+            {
+                var user = (UserModel)e.Item;
+                var userChat = new ConvoPage();
+                userChat.BindingContext = user;
+                await Navigation.PushModalAsync(userChat);
+            };
         }
 
         private void ViewContactList()
