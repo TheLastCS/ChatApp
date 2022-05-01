@@ -27,9 +27,6 @@ namespace ChatApp.ViewModels
             Messages.Insert(0, new MessageModel() { Text = "Hi" });
             Messages.Insert(0, new MessageModel() { Text = "How are you?", User = App.User });
             Messages.Insert(0, new MessageModel() { Text = "What's new?" });
-            Messages.Insert(0, new MessageModel() { Text = "How is your family", User = App.User });
-            Messages.Insert(0, new MessageModel() { Text = "How is your dog?", User = App.User });
-            Messages.Insert(0, new MessageModel() { Text = "How is your cat?", User = App.User });
 
             MessageAppearingCommand = new Command<MessageModel>(OnMessageAppearing);
             MessageDisappearingCommand = new Command<MessageModel>(OnMessageDisappearing);
@@ -45,19 +42,7 @@ namespace ChatApp.ViewModels
             });
 
             //Code to simulate reveing a new message procces
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            {
-                if (LastMessageVisible)
-                {
-                    Messages.Insert(0, new MessageModel() { Text = "New message test", User = "Mario" });
-                }
-                else
-                {
-                    DelayedMessages.Enqueue(new MessageModel() { Text = "New message test", User = "Mario" });
-                    PendingMessageCount++;
-                }
-                return true;
-            });
+           
 
         }
 

@@ -6,7 +6,7 @@
     <Frame BackgroundColor="#01A7E3"
               Padding="10"
               HasShadow="false"
-              Margin="10,10,80,10">
+              Margin="80,10,10,10">
         <Label Text="{Binding Text}" TextColor="White"/>
     </Frame>
 </ViewCell>

@@ -22,6 +22,7 @@ namespace ChatApp.Views
         {
             (this.Parent.Parent.BindingContext as ChatPageViewModel).OnSendCommand.Execute(null);
             chatTextInput.Focus();
+            chatTextInput.Text = "";
         }
 
         public void UnFocusEntry()
