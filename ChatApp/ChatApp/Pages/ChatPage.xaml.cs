@@ -16,7 +16,8 @@ namespace ChatApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChatPage : ContentPage
     {
-        readonly ObservableCollection<UserModel> allContactList = new ObservableCollection<UserModel>()
+        ObservableCollection<UserModel> friendContactList = new ObservableCollection<UserModel>();
+        ObservableCollection<UserModel> allContactList = new ObservableCollection<UserModel>()
         {
             new UserModel()
             {
@@ -45,18 +46,8 @@ namespace ChatApp
         public ChatPage()
         {
             InitializeComponent();
-            this.BindingContext = this;
-            if (allContactList is null)
-            {
-                Console.WriteLine("Null list");
-                ContactLabel.IsVisible = true;
-                ContactsListView.IsVisible = false;
-            }
-            else
-            {
-                ContactLabel.IsVisible = false;
-                ContactsListView.IsVisible = true;
-            }
+            //this.BindingContext = this;
+            
             ViewContactList();
             ContactsListView.ItemTapped += async (object sender, ItemTappedEventArgs e) =>
             {
@@ -67,11 +58,27 @@ namespace ChatApp
                 };
                 await Navigation.PushModalAsync(userChat);
             };
+            SearchedListView.ItemTapped += async (object sender, ItemTappedEventArgs e) =>
+            {
+                var user = (UserModel)e.Item;
+                UserModel userModel = friendContactList.FirstOrDefault(u => u.Id.Equals(user.Id));
+                if (userModel is null)
+                {
+                    friendContactList.Add(allContactList.FirstOrDefault(u => u.Id.Equals(user.Id)));
+                    await DisplayAlert("Sucess", "Added user to contacts", "Confirm");
+                }
+                else
+                {
+                    await DisplayAlert("Error", "User already in contacts", "Confirm");
+                }
+            };
+
+
         }
 
         private void ViewContactList()
         {
-            ContactsListView.ItemsSource = allContactList;
+           ContactsListView.ItemsSource = friendContactList;
         }
 
         private void SearchEntry_TextChanged(object sender, TextChangedEventArgs e)
