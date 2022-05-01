@@ -47,7 +47,12 @@ namespace ChatApp
         private async void Register_Clicked(object sender, EventArgs e)
         {
             IsBusy = true;
-            
+
+            // search for the the user based on email
+            // if email is found, display alert (email must be unique) - end search
+            // if password and confirm password do not match, display alert
+            // if passed all validations, display alert - send verification email
+
             if (!string.IsNullOrEmpty(UsernameEntry.Text) &&  !string.IsNullOrEmpty(EmailEntry.Text) && !string.IsNullOrEmpty(PasswordEntry.Text) && !string.IsNullOrEmpty(ConfirmPasswordEntry.Text))
             {
                 if(PasswordEntry.Text == ConfirmPasswordEntry.Text)

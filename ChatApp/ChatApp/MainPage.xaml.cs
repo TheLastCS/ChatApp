@@ -43,16 +43,27 @@ namespace ChatApp
             {
                 // search for the the user based on email
                 // once email has been found, search is stopped - otherwise display alert
-                // if email and password match, user info is saved to current application properties
+                // if email and password match & if user is validated, user info is saved to current application properties
+                // if user is not validated, display alert
                 // if email and password do not match, display alert
 
-                //for(int i = 0; i < contacts.tempdata.Count; i++) {
+                //for (int i = 0; i < contacts.tempdata.Count; i++)
+                //{
                 //    if (contacts.Email.Equals(EmailEntry.Text) && contacts.Password.Equals(PasswordEntry.Text))
                 //    {
+                //        Application.Current.Properties["id"] = contacts.ID.ToString();
+                //        Application.Current.Properties["username"] = contacts.Username.ToString();
+                //        Application.Current.Properties["email"] = contacts.Email.ToString();
+                //        Application.Current.Properties["password"] = contacts.Password.ToString();
+                //        Application.Current.Properties["isvalidated"] = contacts.isValidated.ToString();
+                //        IsBusy = false;
+
+                //        await Application.Current.SavePropertiesAsync();
+                //        Application.Current.MainPage = new TabbedPage(EmailEntry.Text);
                 //    }
                 //}
-                
-                if(EmailEntry.Text == "admin@gmail.com" && PasswordEntry.Text == "admin")
+
+                if (EmailEntry.Text == "admin@gmail.com" && PasswordEntry.Text == "admin")
                 {
                     Application.Current.Properties["email"] = EmailEntry.Text;
                     Application.Current.Properties["password"] = PasswordEntry.Text;
