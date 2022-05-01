@@ -45,5 +45,9 @@ namespace ChatApp.Views
 
             }
         }
+        public void OnListTapped(object sender, ItemTappedEventArgs e)
+        {
+            chatInput.UnFocusEntry();
+        }
     }
 }
