@@ -16,7 +16,7 @@ namespace ChatApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChatPage : ContentPage
     {
-        ObservableCollection<UserModel> allContactList = new ObservableCollection<UserModel>()
+        readonly ObservableCollection<UserModel> allContactList = new ObservableCollection<UserModel>()
         {
             new UserModel()
             {
@@ -61,8 +61,10 @@ namespace ChatApp
             ContactsListView.ItemTapped += async (object sender, ItemTappedEventArgs e) =>
             {
                 var user = (UserModel)e.Item;
-                var userChat = new ConvoPage();
-                userChat.BindingContext = user;
+                var userChat = new ConvoPage
+                {
+                    BindingContext = user
+                };
                 await Navigation.PushModalAsync(userChat);
             };
         }

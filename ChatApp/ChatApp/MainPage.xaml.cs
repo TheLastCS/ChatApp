@@ -12,7 +12,7 @@ namespace ChatApp
 {
     public partial class MainPage : ContentPage
     {
-        Contacts contacts = new Contacts();
+        readonly Contacts contacts = new Contacts();
         public MainPage()
         {
             InitializeComponent();

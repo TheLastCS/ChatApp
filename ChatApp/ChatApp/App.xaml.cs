@@ -11,6 +11,8 @@ namespace ChatApp
         public static float screenHeight { get; set; }
         public static float appScale { get; set; }
 
+        public static string User = "Rendy";
+
         public App()
         {
             InitializeComponent();
