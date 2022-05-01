@@ -66,16 +66,29 @@ namespace ChatApp
 
         private void SearchEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Contacts contacts = new Contacts();
-            if (string.IsNullOrEmpty(e.NewTextValue))
+            SearchBar searchBar = (SearchBar)sender;
+            if (!string.IsNullOrEmpty(searchBar.Text))
             {
-                ContactsListView.ItemsSource = contacts.tempdata;
+                SearchedListView.ItemsSource = allContactList.Where(u => u.Email.ToLower().Contains(SearchEntry.Text.ToLower())).ToList();
+                ContactLabel.IsVisible = false;
+                ContactsListView.IsVisible = false;
+                SearchedListView.IsVisible = true;
             }
-
             else
             {
-                ContactsListView.ItemsSource = contacts.tempdata.Where(x => x.Username.StartsWith(e.NewTextValue));
+                if(allContactList.Count <= 0)
+                {
+                    ContactLabel.IsVisible = true;
+                    SearchedListView.IsVisible = false;
+                }
+                else
+                {
+                    ContactLabel.IsVisible = false;
+                    ContactsListView.IsVisible = true;
+                    SearchedListView.IsVisible = false;
+                }
             }
+            
         }
 
      
