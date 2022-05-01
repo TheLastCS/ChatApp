@@ -16,6 +16,7 @@ namespace ChatApp
             InitializeComponent();
             this.BindingContext = new MainPageViewModel(this);
             NavigationPage.SetHasNavigationBar(this, false);
+
             EmailEntry.Text = "admin@gmail";
             PasswordEntry.Text = "admin";
             EmailEntry.Focused += (s, a) =>
@@ -27,15 +28,23 @@ namespace ChatApp
             {
                 PasswordFrame.BorderColor = Color.FromHex("#00529C");
             };
+
+            this.BindingContext = this;
+            this.IsBusy = false;
+            this.SignInBtn.Clicked += SignIn_Clicked;
         }
         private async void SignIn_Clicked(object sender, EventArgs e)
         {
+            IsBusy = true;
+
             if(!string.IsNullOrEmpty(EmailEntry.Text) && !string.IsNullOrEmpty(PasswordEntry.Text))
             {
                 if(EmailEntry.Text == "admin@gmail.com" && PasswordEntry.Text == "admin")
                 {
                     Application.Current.Properties["email"] = EmailEntry.Text;
                     Application.Current.Properties["password"] = PasswordEntry.Text;
+                    IsBusy = false;
+
                     await Application.Current.SavePropertiesAsync();
                     Application.Current.MainPage = new TabbedPage(EmailEntry.Text);
                 }

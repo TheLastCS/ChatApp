@@ -39,22 +39,43 @@ namespace ChatApp
             {
                 ConfirmPasswordFrame.BorderColor = Color.FromHex("#00529C");
             };
+
+            this.BindingContext = this;
+            this.IsBusy = false;
+            this.SignInBtn.Clicked += SignIn_Clicked;
         }
         private async void Register_Clicked(object sender, EventArgs e)
         {
+            IsBusy = true;
+            
             if (!string.IsNullOrEmpty(UsernameEntry.Text) &&  !string.IsNullOrEmpty(EmailEntry.Text) && !string.IsNullOrEmpty(PasswordEntry.Text) && !string.IsNullOrEmpty(ConfirmPasswordEntry.Text))
             {
                 if(PasswordEntry.Text == ConfirmPasswordEntry.Text)
                 {
+                    IsBusy = false;
                     await DisplayAlert("Success", "Register Successful! Verification email sent.", "OKAY");
-                    await Application.Current.SavePropertiesAsync();
 
+                    await Application.Current.SavePropertiesAsync();
                     Application.Current.MainPage = new MainPage();
+                } else
+                {
+                    IsBusy = false;
+
+                    PasswordFrame.BorderColor = Color.Red;
+                    ConfirmPasswordFrame.BorderColor = Color.Red;
+
+                    await DisplayAlert("Error", "Password does not match.", "OKAY");
+
+                    PasswordEntry.Text = string.Empty;
+                    ConfirmPasswordEntry.Text = string.Empty;
+
                 }
                 
             }
             else
             {
+                IsBusy = false;
+
                 UsernameFrame.BorderColor = Color.Red;
                 EmailFrame.BorderColor = Color.Red;
                 PasswordFrame.BorderColor = Color.Red;
@@ -73,7 +94,7 @@ namespace ChatApp
         private async void SignIn_Clicked(object sender, EventArgs e)
         {
             await Application.Current.SavePropertiesAsync();
-
+           
             Application.Current.MainPage = new MainPage();
         }
     }

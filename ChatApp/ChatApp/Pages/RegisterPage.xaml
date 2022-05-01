@@ -9,6 +9,8 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="White">
+                <ActivityIndicator x:Name="Activity" Color="#00529C" BackgroundColor="Transparent" IsRunning="{Binding isBusy}" VerticalOptions="Center" HorizontalOptions="Center">
+                </ActivityIndicator>
                 <Frame BackgroundColor="Transparent" Padding="12,24,12,0" CornerRadius="0">
                     <Image x:Name="Logo" Source="Login" Aspect="AspectFit" WidthRequest="220"></Image>
                 </Frame>
