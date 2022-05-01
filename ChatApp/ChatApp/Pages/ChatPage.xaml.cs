@@ -45,6 +45,17 @@ namespace ChatApp
         {
             InitializeComponent();
             this.BindingContext = this;
+            if (allContactList is null)
+            {
+                Console.WriteLine("Null list");
+                ContactLabel.IsVisible = true;
+                ContactsListView.IsVisible = false;
+            }
+            else
+            {
+                ContactLabel.IsVisible = false;
+                ContactsListView.IsVisible = true;
+            }
             ViewContactList();
         }
 

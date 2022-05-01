@@ -13,7 +13,7 @@
                 <SearchBar x:Name="SearchEntry" Placeholder="Search for friends" Keyboard="Email" Margin="5" FontSize="Subtitle" TextColor="#000000" TextChanged="SearchEntry_TextChanged"></SearchBar>
             </Frame>
 
-            <Grid VerticalOptions="EndAndExpand" >
+            <Grid VerticalOptions="StartAndExpand" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -21,7 +21,9 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ListView x:Name="ContactsListView" SeparatorVisibility="None" HasUnevenRows="False" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="1" IsVisible="True" BackgroundColor="Transparent">
+                <Label x:Name="ContactLabel" Text="You have no contacts as of the moment" FontSize="Large" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0"
+                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" IsVisible="True"/>
+                <ListView x:Name="ContactsListView" SeparatorVisibility="None" HasUnevenRows="False" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="1" IsVisible="False" BackgroundColor="Transparent">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -60,8 +62,8 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>-->
                 </ListView>
-                <!--<Label x:Name="ContactLabel" Text="You have no contacts as of the moment" FontSize="Large" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0"
-                       Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1"/>-->
+                <!--"<Label x:Name="ContactLabel" Text="You have no contacts as of the moment" FontSize="Large" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0"
+                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" IsVisible="False"/> -->
             </Grid>
         </StackLayout>
     </ContentPage.Content>
