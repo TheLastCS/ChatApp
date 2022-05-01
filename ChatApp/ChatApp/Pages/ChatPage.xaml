@@ -22,14 +22,14 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <ListView x:Name="ContactsListView" SeparatorVisibility="None" HasUnevenRows="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1">
-                    <ListView.Header>
+                    <!--<ListView.Header>
                         <Label Text="List starts here.." TextColor="Black" HorizontalOptions="Fill"
                            HorizontalTextAlignment="Center"/>
                     </ListView.Header>
                     <ListView.Footer>
                         <Label Text="List ends here.." TextColor="Black" HorizontalOptions="Fill" 
                            HorizontalTextAlignment="Center"/>
-                    </ListView.Footer>
+                    </ListView.Footer>-->
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <!--<ViewCell>-->
