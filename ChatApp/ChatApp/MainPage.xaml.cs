@@ -6,11 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using ChatApp.ViewModels;
+using ChatApp.Helpers;
 
 namespace ChatApp
 {
     public partial class MainPage : ContentPage
     {
+        Contacts contacts = new Contacts();
         public MainPage()
         {
             InitializeComponent();
@@ -39,6 +41,17 @@ namespace ChatApp
 
             if(!string.IsNullOrEmpty(EmailEntry.Text) && !string.IsNullOrEmpty(PasswordEntry.Text))
             {
+                // search for the the user based on email
+                // once email has been found, search is stopped - otherwise display alert
+                // if email and password match, user info is saved to current application properties
+                // if email and password do not match, display alert
+
+                //for(int i = 0; i < contacts.tempdata.Count; i++) {
+                //    if (contacts.Email.Equals(EmailEntry.Text) && contacts.Password.Equals(PasswordEntry.Text))
+                //    {
+                //    }
+                //}
+                
                 if(EmailEntry.Text == "admin@gmail.com" && PasswordEntry.Text == "admin")
                 {
                     Application.Current.Properties["email"] = EmailEntry.Text;
