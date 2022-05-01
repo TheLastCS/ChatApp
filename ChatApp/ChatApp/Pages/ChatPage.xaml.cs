@@ -1,6 +1,8 @@
 ﻿using ChatApp.Helpers;
+using ChatApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,17 +15,43 @@ namespace ChatApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChatPage : ContentPage
     {
-        
+        ObservableCollection<UserModel> allContactList = new ObservableCollection<UserModel>()
+        {
+            new UserModel()
+            {
+                Id = 1,
+                Username = "Jomar M. Leano",
+                Email = "jomarLeano@gmail.com",
+                Password = "jomar"
+            },
+            new UserModel()
+            {
+                Id = 2,
+                Username = "Christian Stewart",
+                Email = "christianStewart@gmail.com",
+                Password = "christian",
+            }
+        };
+
+        //Temporary
+        //private ObservableCollection<UserModel> ContactList;
+        //public ObservableCollection<UserModel> getContacts
+        //{
+        //    get { return ContactList; }
+        //    set { ContactList = value; }
+        //}
 
         public ChatPage()
         {
             InitializeComponent();
-            Contacts contacts = new Contacts();
-
-            ContactsListView.ItemsSource = contacts.tempdata;
+            this.BindingContext = this;
+            ViewContactList();
         }
 
-        
+        private void ViewContactList()
+        {
+            ContactsListView.ItemsSource = allContactList;
+        }
 
         private void SearchEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -38,4 +66,8 @@ namespace ChatApp
                 ContactsListView.ItemsSource = contacts.tempdata.Where(x => x.Username.StartsWith(e.NewTextValue));
             }
         }
+
+     
+
     }
+}

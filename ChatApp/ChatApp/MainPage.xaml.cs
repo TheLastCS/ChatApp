@@ -72,6 +72,11 @@ namespace ChatApp
                     await Application.Current.SavePropertiesAsync();
                     Application.Current.MainPage = new TabbedPage(EmailEntry.Text);
                 }
+                else
+                {
+                    await DisplayAlert("Incorrect Credentials", "Please Enter Your Correct Login Information.", "OKAY");
+                }
+               
                 
             } else
             {
