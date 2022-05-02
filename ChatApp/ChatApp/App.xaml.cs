@@ -17,7 +17,17 @@ namespace ChatApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            bool isLoggedIn = Current.Properties.ContainsKey("isLoggedIn") ? Convert.ToBoolean(Current.Properties["isLoggedIn"]) : false;
+            string email = Current.Properties.ContainsKey("email") ? Convert.ToString(Current.Properties["email"]) : null;
+            if (!isLoggedIn)
+            {
+                MainPage = new MainPage();
+            }
+            else
+            {
+                MainPage = new TabbedPage(email);
+            }
+            
         }
 
         protected override void OnStart()

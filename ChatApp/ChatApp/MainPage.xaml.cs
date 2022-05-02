@@ -68,7 +68,7 @@ namespace ChatApp
                     Application.Current.Properties["email"] = EmailEntry.Text;
                     Application.Current.Properties["password"] = PasswordEntry.Text;
                     IsBusy = false;
-
+                    Application.Current.Properties["isLoggedIn"] = Boolean.TrueString;
                     await Application.Current.SavePropertiesAsync();
                     Application.Current.MainPage = new TabbedPage(EmailEntry.Text);
                 }
