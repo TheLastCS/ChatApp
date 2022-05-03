@@ -32,6 +32,13 @@ namespace ChatApp
                 Username = "Christian Stewart",
                 Email = "christianstewart@gmail.com",
                 Password = "christian",
+            },
+            new UserModel()
+            {
+                Id = 3,
+                Username = "Admin User",
+                Email = "admin@gmail.com",
+                Password = "admin",
             }
         };
 
@@ -52,7 +59,7 @@ namespace ChatApp
             ContactsListView.ItemTapped += async (object sender, ItemTappedEventArgs e) =>
             {
                 var user = (UserModel)e.Item;
-                var userChat = new ConversationPage( );
+                var userChat = new ConversationPage();
                 {
                     BindingContext = user;
                 };
@@ -61,6 +68,7 @@ namespace ChatApp
             SearchedListView.ItemTapped += async (object sender, ItemTappedEventArgs e) =>
             {
                 var user = (UserModel)e.Item;
+                
                 UserModel userModel = friendContactList.FirstOrDefault(u => u.Id.Equals(user.Id));
                 if (userModel is null)
                 {
@@ -93,10 +101,11 @@ namespace ChatApp
             }
             else
             {
-                if(allContactList.Count <= 0)
+                if(friendContactList.Count <= 0 && string.IsNullOrEmpty(searchBar.Text))
                 {
                     ContactLabel.IsVisible = true;
                     SearchedListView.IsVisible = false;
+                    SearchLabel.IsVisible = false;
                 }
                 else
                 {
@@ -105,7 +114,13 @@ namespace ChatApp
                     SearchedListView.IsVisible = false;
                 }
             }
-            
+            if (allContactList.Where(u => u.Email.ToLower().Contains(SearchEntry.Text.ToLower())).ToList().Count <=0)
+            {
+                SearchLabel.IsVisible = true;
+                ContactLabel.IsVisible = false;
+                ContactsListView.IsVisible = false;
+                SearchedListView.IsVisible = false;
+            }
         }
 
      

@@ -18,7 +18,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Frame BackgroundColor="#01A7E3" VerticalOptions="Start" Grid.Row="0">
-            <Label Text="User Name Here"
+            <Label x:Name="chatName" Text="{Binding Username}"
                     HorizontalOptions="Start"
                     TextColor="White"
                     FontSize="Title"/>

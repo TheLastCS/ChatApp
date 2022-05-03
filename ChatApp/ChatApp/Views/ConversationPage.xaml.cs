@@ -18,6 +18,7 @@ namespace ChatApp.Views
         {
             InitializeComponent();
             this.BindingContext = new ChatPageViewModel();
+
         }
 
         public void ScrollTap(object sender, System.EventArgs e)
