@@ -23,14 +23,14 @@ namespace ChatApp
             {
                 Id = 1,
                 Username = "Jomar M. Leano",
-                Email = "jomarLeano@gmail.com",
+                Email = "jomarleano@gmail.com",
                 Password = "jomar"
             },
             new UserModel()
             {
                 Id = 2,
                 Username = "Christian Stewart",
-                Email = "christianStewart@gmail.com",
+                Email = "christianstewart@gmail.com",
                 Password = "christian",
             }
         };
@@ -52,7 +52,7 @@ namespace ChatApp
             ContactsListView.ItemTapped += async (object sender, ItemTappedEventArgs e) =>
             {
                 var user = (UserModel)e.Item;
-                var userChat = new ConversationPage();
+                var userChat = new ConversationPage( );
                 {
                     BindingContext = user;
                 };

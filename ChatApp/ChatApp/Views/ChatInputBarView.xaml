@@ -13,16 +13,17 @@
         </Grid.ColumnDefinitions>
         <Entry x:Name="chatTextInput" 
                  Text="{Binding TextToSend}" 
-                 Margin="1"  
+                 Margin="10,1,1,1"  
                  TextColor="Black" 
                  Keyboard="Chat"  
                  HorizontalOptions="FillAndExpand" 
                  PlaceholderColor="LightGray"
-                 Placeholder="Type your message here"
+                 Placeholder="Type a message..."
                  Grid.Row="0" 
                  Grid.Column="0"
-                 Completed="Handle_Completed"/>
-        <Label Text="Send"
+                 Completed="Handle_Completed"
+                 WidthRequest="170"/>
+        <!--<Label Text="Send"
                Grid.Row="0"
                Grid.Column="1"
                VerticalTextAlignment="Center">
@@ -31,6 +32,13 @@
                       Command="{Binding OnSendCommand}"
                       Tapped="Handle_Completed"/>
             </Label.GestureRecognizers>
-        </Label>
+        </Label>-->
+        <Button ImageSource="SendButton" Grid.Row="0"
+               Grid.Column="1" BackgroundColor="Transparent" HeightRequest="40" Margin="5, 10,-20, 10" HorizontalOptions="End">
+            <Button.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding OnSendCommand}"
+                      Tapped="Handle_Completed"/>
+            </Button.GestureRecognizers>
+        </Button>
     </Grid>
 </ContentView>

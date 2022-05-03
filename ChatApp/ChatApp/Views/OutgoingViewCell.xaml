@@ -4,9 +4,15 @@
              x:Class="ChatApp.Views.OutgoingViewCell"
              x:Name="outgoingViewCell">
     <Frame BackgroundColor="#01A7E3"
-              Padding="10"
+              Padding="12,10,12,10"
               HasShadow="false"
-              Margin="80,10,10,10">
-        <Label Text="{Binding Text}" TextColor="White"/>
+              Margin="10,10,10,10"
+              CornerRadius="18"
+              HorizontalOptions="Start">
+        <StackLayout Orientation="Vertical">
+            <!--<Label Text="{Binding Username}" TextColor="White"/>-->
+            <Label Text="{Binding Text}" TextColor="White"/>
+            <!--<Label Text="{Binding DateTime}" TextColor="White"/>-->
+        </StackLayout>
     </Frame>
 </ViewCell>

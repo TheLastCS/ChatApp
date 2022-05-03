@@ -9,6 +9,7 @@
             <local:ChatSelectorHelper x:Key="MessageTemplateSelector"/>
         </ResourceDictionary>
     </ContentPage.Resources>
+    
     <Grid RowSpacing="0" 
            ColumnSpacing="0">
         <Grid.RowDefinitions>
@@ -16,10 +17,17 @@
             <RowDefinition Height="1" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <Frame BackgroundColor="#01A7E3" VerticalOptions="Start" Grid.Row="0">
+            <Label Text="User Name Here"
+                    HorizontalOptions="Start"
+                    TextColor="White"
+                    FontSize="Title"/>
+            <!--Text="{Binding Username}"-->
+        </Frame>
         <controls:ExtendedListView Grid.Row="0" 
                  ItemTemplate="{StaticResource MessageTemplateSelector}" 
                  ItemsSource="{Binding Messages}" 
-                 Margin="0"
+                 Margin="0,80,0,0"
                  ItemTapped="OnListTapped"
                  FlowDirection="RightToLeft"
                  HasUnevenRows="True" x:Name="ChatList"
@@ -28,7 +36,8 @@
                  ItemAppearingCommand="{Binding MessageAppearingCommand}"
                  ItemDisappearingCommand="{Binding MessageDisappearingCommand}">
         </controls:ExtendedListView>
-        <Frame HorizontalOptions="EndAndExpand" 
+        <StackLayout Orientation="Vertical">
+            <Frame HorizontalOptions="EndAndExpand" 
                                  Margin="0,0,2,15"
                                  VerticalOptions="End"
                                  HasShadow="false" 
@@ -38,22 +47,24 @@
                                  Padding="1"
                                  BackgroundColor="White"   
                                  IsVisible="{Binding ShowScrollTap,Mode=TwoWay}">
-            <StackLayout Spacing="3">
-                <Label Text="{Binding PendingMessageCount}"
+                <StackLayout Spacing="3">
+                    <Label Text="{Binding PendingMessageCount}"
                               HorizontalOptions="CenterAndExpand"
                               IsVisible="{Binding PendingMessageCountVisible}"
                               VerticalTextAlignment="Center"
                               TextColor="{DynamicResource primary}"/>
-                <Image Source="ic_scrolldown"
+                    <Image Source="ic_scrolldown"
                                WidthRequest="30"
                                HeightRequest="30"
                                VerticalOptions="CenterAndExpand"/>
 
-            </StackLayout>
-            <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ScrollTap"/>
-            </Frame.GestureRecognizers>
-        </Frame>
+                </StackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ScrollTap"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </StackLayout>
+        
         <BoxView HorizontalOptions="FillAndExpand"
                  HeightRequest="1"
                  BackgroundColor="LightGray"
