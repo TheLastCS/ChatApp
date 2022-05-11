@@ -27,7 +27,12 @@ namespace ChatApp.Views
             {
                 if (BindingContext != null)
                 {
-                    var vm = BindingContext as ChatPageViewModel;
+                    var vm = BindingContext as ChatPageViewModel; //returns null because bindingcontext refers to usermodel not chatpageviewmodel
+                   
+                    if(vm is null)
+                    {
+                        Console.WriteLine("Hello"+vm+ "Hahah");
+                    }
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
