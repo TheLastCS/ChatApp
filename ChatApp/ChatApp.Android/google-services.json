@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "912222518090",
+    "project_id": "wave-d7d08",
+    "storage_bucket": "wave-d7d08.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912222518090:android:8bfca60629c8a966891fb3",
+        "android_client_info": {
+          "package_name": "com.companyname.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912222518090-i2btffofhgp9bkvj1u63mb24tllsel19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOFio7WcepIAl736gsUw3QNnMlMW629Dk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912222518090-i2btffofhgp9bkvj1u63mb24tllsel19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

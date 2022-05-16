@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Xamarin.Forms;
+using Firebase;
 
 namespace ChatApp.Droid
 {
@@ -16,6 +17,8 @@ namespace ChatApp.Droid
             //UI SCALE
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+            FirebaseApp.InitializeApp(this);
+
 
             var density = Resources.DisplayMetrics.Density;
             App.screenWidth = Resources.DisplayMetrics.WidthPixels / density;
