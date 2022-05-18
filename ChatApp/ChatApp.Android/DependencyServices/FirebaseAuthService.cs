@@ -37,17 +37,21 @@ namespace ChatApp.Droid
                     {
                         Id = int.Parse(FirebaseAuth.Instance.CurrentUser.Uid),
                         Email = FirebaseAuth.Instance.CurrentUser.Email,
-                        Username = FirebaseAuth.Instance.CurrentUser.name,
-
-                    }
+                        Username = dataClass.loggedInUser.Username,
+                        userType = dataClass.loggedInUser.userType,
+                        created_at = dataClass.loggedInUser.created_at
+                    };
+                    dataClass.isSignedIn = true;
                 }
+                return response;
             }
-            catch
+            catch (Exception ex)
             {
-
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = false, response = ex.Message };
+                dataClass.isSignedIn = false;
+                dataClass.loggedInUser = new UserModel();
+                return response;
             }
-            throw new NotImplementedException();
-
         }
 
         public Task<FirebaseAuthResponseModel> LoginWithEmailPassword(string email, string password)
