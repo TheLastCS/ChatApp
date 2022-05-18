@@ -36,6 +36,27 @@ namespace ChatApp.Models
         {
             get { return _password; }
             set { _password = value; OnPropertyChanged("Password"); }
+        }     
+        
+        private string _userType;
+        public string userType
+        {
+            get { return _userType; }
+            set { _userType = value; OnPropertyChanged("UserType"); }
+        }
+        /// <summary>
+        /// User Type
+        /// 0 - Email
+        /// 1 - Google Sign in
+        /// 2 - Facebook Sign in
+        /// </summary>
+
+        private DateTime _created_at;
+
+        public DateTime created_at
+        {
+            get { return _created_at; }
+            set { _created_at = value; OnPropertyChanged("CreateAt"); }
         }
     }
 }
