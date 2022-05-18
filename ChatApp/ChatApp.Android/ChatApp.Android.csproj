@@ -82,6 +82,7 @@
     <Compile Include="CustomRenderers\CustomButtonRenderer.cs" />
     <Compile Include="CustomRenderers\CustomEntryRenderer.cs" />
     <Compile Include="CustomRenderers\CustomListViewRenderer.cs" />
+    <Compile Include="DependencyServices\FirebaseAuthService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
