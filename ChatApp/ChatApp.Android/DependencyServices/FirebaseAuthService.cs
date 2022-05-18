@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using ChatApp.Droid;
 using Xamarin.Forms;
 using Firebase.Auth;
+using ChatApp.Models;
 
 [assembly: Dependency(typeof(FirebaseAuthService))]
 namespace ChatApp.Droid
@@ -26,7 +27,19 @@ namespace ChatApp.Droid
                 FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = true, response = "Currently logged in." };
                 if(FirebaseAuth.Instance.CurrentUser.Uid == null)
                 {
+                    response = new FirebaseAuthResponseModel() { status = false, response = "Currently logged out." };
+                    dataClass.isSignedIn = false;
+                    dataClass.loggedInUser = new UserModel();
+                }
+                else
+                {
+                    dataClass.loggedInUser = new UserModel()
+                    {
+                        Id = int.Parse(FirebaseAuth.Instance.CurrentUser.Uid),
+                        Email = FirebaseAuth.Instance.CurrentUser.Email,
+                        Username = FirebaseAuth.Instance.CurrentUser.name,
 
+                    }
                 }
             }
             catch
