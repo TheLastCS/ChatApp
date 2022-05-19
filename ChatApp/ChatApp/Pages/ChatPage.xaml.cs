@@ -54,7 +54,14 @@ namespace ChatApp
             DataClass dataClass = DataClass.GetInstance;
             InitializeComponent();
             //this.BindingContext = this;
-            Checker.Text = dataClass.loggedInUser.ToString();
+            if (dataClass.loggedInUser.Username == "")
+            {
+                Checker.Text = "empty";
+            }else if(dataClass.loggedInUser.Username == null)
+            {
+                Checker.Text = "null";
+            }
+            
             ViewContactList();
             ContactsListView.ItemTapped += async (object sender, ItemTappedEventArgs e) =>
             {

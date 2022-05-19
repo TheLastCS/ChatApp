@@ -75,9 +75,9 @@ namespace ChatApp.Droid
                     {
                         Id = FirebaseAuth.Instance.CurrentUser.Uid,
                         Email = FirebaseAuth.Instance.CurrentUser.Email,
-                        Username = dataClass.loggedInUser.Username,
-                        userType = dataClass.loggedInUser.userType,
-                        created_at = dataClass.loggedInUser.created_at
+                        Username = model.Username,
+                        userType = model.userType,
+                        created_at = model.created_at
                     };
                     dataClass.isSignedIn = true;
                 }
