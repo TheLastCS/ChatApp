@@ -38,8 +38,8 @@ namespace ChatApp.Models
             set { _password = value; OnPropertyChanged("Password"); }
         }     
         
-        private string _userType;
-        public string userType
+        private int _userType;
+        public int userType
         {
             get { return _userType; }
             set { _userType = value; OnPropertyChanged("UserType"); }

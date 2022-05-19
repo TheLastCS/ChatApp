@@ -12,6 +12,7 @@ using ChatApp.Droid;
 using Xamarin.Forms;
 using Firebase.Auth;
 using ChatApp.Models;
+using Plugin.CloudFirestore;
 
 [assembly: Dependency(typeof(FirebaseAuthService))]
 namespace ChatApp.Droid
@@ -54,24 +55,113 @@ namespace ChatApp.Droid
             }
         }
 
-        public Task<FirebaseAuthResponseModel> LoginWithEmailPassword(string email, string password)
+        [Obsolete]
+        public async Task<FirebaseAuthResponseModel> LoginWithEmailPassword(string email, string password)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = true, response = "Login successful." };
+                IAuthResult result = await FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(email,password);
+
+                if(result.User.IsEmailVerified && email == result.User.Email)
+                {
+                    var document = await CrossCloudFirestore.Current
+                                         .Instance
+                                         .GetCollection("users")
+                                         .GetDocument(result.User.Uid)
+                                         .GetDocumentAsync();
+                    var model = document.ToObject<UserModel>();
+
+                    dataClass.loggedInUser = new UserModel()
+                    {
+                        Id = int.Parse(FirebaseAuth.Instance.CurrentUser.Uid),
+                        Email = FirebaseAuth.Instance.CurrentUser.Email,
+                        Username = dataClass.loggedInUser.Username,
+                        userType = dataClass.loggedInUser.userType,
+                        created_at = dataClass.loggedInUser.created_at
+                    };
+                    dataClass.isSignedIn = true;
+                }
+                else
+                {
+                    FirebaseAuth.Instance.CurrentUser.SendEmailVerification();
+                    response.status = false;
+                    response.response = "Email not verified. Sent another verification email.";
+                    dataClass.loggedInUser = new UserModel();
+                    dataClass.isSignedIn = false;
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = false, response = ex.Message };
+                dataClass.isSignedIn = false;
+                dataClass.loggedInUser = new UserModel();
+                return response;
+            }
+            
         }
 
-        public Task<FirebaseAuthResponseModel> ResetPassword(string email)
+        public async Task<FirebaseAuthResponseModel> ResetPassword(string email)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = true, response = "Email has been sent to your email address." };
+                await FirebaseAuth.Instance.SendPasswordResetEmailAsync(email);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = false, response = ex.Message };
+                return response;
+            }
         }
 
         public FirebaseAuthResponseModel SignOut()
         {
-            throw new NotImplementedException();
+            try
+            {
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = true, response = "Successfully logged out" };
+                FirebaseAuth.Instance.SignOut();
+                dataClass.isSignedIn = false;
+                dataClass.loggedInUser = new UserModel();
+                return response;
+            }
+            catch (Exception ex)
+            {
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = false, response = ex.Message };
+                dataClass.isSignedIn = true;
+                return response;
+            }
         }
 
-        public Task<FirebaseAuthResponseModel> SignUpwithEmailPassword(string email, string password)
+        public async Task<FirebaseAuthResponseModel> SignUpwithEmailPassword(string name,string email, string password)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = true, response = "Successfully signed in" };
+                await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
+                FirebaseAuth.Instance.CurrentUser.SendEmailVerification();
+
+                int ndx = email.IndexOf("@");
+                int cnt = email.Length - ndx;
+                string defaultName = string.IsNullOrEmpty(name) ? email.Remove(ndx, cnt) : name;
+
+                dataClass.loggedInUser = new UserModel()
+                {
+                    Id = int.Parse(FirebaseAuth.Instance.CurrentUser.Uid),
+                    Email = email,
+                    Username = name,
+                    userType = 0,
+                    created_at = DateTime.UtcNow
+                };
+                return response;
+            }
+            catch (Exception ex)
+            {
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = false, response = ex.Message };
+                return response;
+            }
         }
     }
 }
