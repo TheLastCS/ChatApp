@@ -7,8 +7,8 @@ namespace ChatApp.Models
 {
     public class UserModel : ObservableObject
     {
-        private int _id;
-        public int Id
+        private string _id;
+        public string Id
         {
             get { return _id; }
             set { _id = value; OnPropertyChanged("Id"); }

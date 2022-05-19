@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Plugin.CloudFirestore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,15 +12,10 @@ namespace ChatApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
+        DataClass dataClass = DataClass.GetInstance;
         public RegisterPage()
         {
             InitializeComponent();
-
-            UsernameEntry.Text = "admin";
-            EmailEntry.Text = "admin@gmail.com";
-            PasswordEntry.Text = "admin";
-            ConfirmPasswordEntry.Text = "admin";
-
             EmailEntry.Focused += (s, a) =>
             {
                 UsernameFrame.BorderColor = Color.FromHex("#00529C");
@@ -40,60 +35,68 @@ namespace ChatApp
                 ConfirmPasswordFrame.BorderColor = Color.FromHex("#00529C");
             };
 
-            this.BindingContext = this;
-            this.IsBusy = false;
-            this.SignInBtn.Clicked += SignIn_Clicked;
+            BindingContext = this;
+            IsBusy = false;
+            SignInBtn.Clicked += SignIn_Clicked;
         }
+
+        [Obsolete]
         private async void Register_Clicked(object sender, EventArgs e)
         {
-            IsBusy = true;
-
-            // search for the the user based on email
-            // if email is found, display alert (email must be unique) - end search
-            // if password and confirm password do not match, display alert
-            // if passed all validations, display alert - send verification email
-
             if (!string.IsNullOrEmpty(UsernameEntry.Text) &&  !string.IsNullOrEmpty(EmailEntry.Text) && !string.IsNullOrEmpty(PasswordEntry.Text) && !string.IsNullOrEmpty(ConfirmPasswordEntry.Text))
             {
-                if(PasswordEntry.Text == ConfirmPasswordEntry.Text)
+                if (PasswordEntry.Text == ConfirmPasswordEntry.Text)
+                {
+                    FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { };
+                    response = await DependencyService.Get<iFirebaseAuth>().SignUpwithEmailPassword(UsernameEntry.Text, EmailEntry.Text, PasswordEntry.Text);
+
+                    if (response.status)
+                    {
+                        try
+                        {
+                            await CrossCloudFirestore.Current
+                                .Instance
+                                .GetCollection("users")
+                                .GetDocument(dataClass.loggedInUser.Id)
+                                .SetDataAsync(dataClass.loggedInUser);
+                            await DisplayAlert("Success", response.response, "Okay");
+                            //await Application.Current.SavePropertiesAsync(); 
+                            Application.Current.MainPage = new MainPage();
+                        }
+                        catch
+                        {
+
+                            await DisplayAlert("Error CrossCloudFirestore", response.response, "Okay");
+                        }
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error responseStatus ", response.response, "Okay");
+                    }
+                }
+                else
                 {
                     IsBusy = false;
-                    await DisplayAlert("Success", "Register Successful! Verification email sent.", "OKAY");
-
-                    await Application.Current.SavePropertiesAsync();
-                    Application.Current.MainPage = new MainPage();
-                } else
-                {
-                    IsBusy = false;
-
                     PasswordFrame.BorderColor = Color.Red;
                     ConfirmPasswordFrame.BorderColor = Color.Red;
-
                     await DisplayAlert("Error", "Password does not match.", "OKAY");
-
                     PasswordEntry.Text = string.Empty;
                     ConfirmPasswordEntry.Text = string.Empty;
-
+                    PasswordEntry.Focus();
                 }
-                
             }
             else
             {
                 IsBusy = false;
-
                 UsernameFrame.BorderColor = Color.Red;
                 EmailFrame.BorderColor = Color.Red;
                 PasswordFrame.BorderColor = Color.Red;
                 ConfirmPasswordFrame.BorderColor = Color.Red;
-
                 await DisplayAlert("Error", "Missing Fields. Please Enter Your Information.", "OKAY");
-                
                 UsernameEntry.Text = string.Empty;
                 EmailEntry.Text = string.Empty;
                 PasswordEntry.Text = string.Empty;
                 ConfirmPasswordEntry.Text = string.Empty;
-
-                //UsernameEntry.Focus();
             }
         }
         private async void SignIn_Clicked(object sender, EventArgs e)

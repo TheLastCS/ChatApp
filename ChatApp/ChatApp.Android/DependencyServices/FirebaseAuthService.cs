@@ -36,7 +36,7 @@ namespace ChatApp.Droid
                 {
                     dataClass.loggedInUser = new UserModel()
                     {
-                        Id = int.Parse(FirebaseAuth.Instance.CurrentUser.Uid),
+                        Id = FirebaseAuth.Instance.CurrentUser.Uid,
                         Email = FirebaseAuth.Instance.CurrentUser.Email,
                         Username = dataClass.loggedInUser.Username,
                         userType = dataClass.loggedInUser.userType,
@@ -74,7 +74,7 @@ namespace ChatApp.Droid
 
                     dataClass.loggedInUser = new UserModel()
                     {
-                        Id = int.Parse(FirebaseAuth.Instance.CurrentUser.Uid),
+                        Id = FirebaseAuth.Instance.CurrentUser.Uid,
                         Email = FirebaseAuth.Instance.CurrentUser.Email,
                         Username = dataClass.loggedInUser.Username,
                         userType = dataClass.loggedInUser.userType,
@@ -135,26 +135,28 @@ namespace ChatApp.Droid
             }
         }
 
-        public async Task<FirebaseAuthResponseModel> SignUpwithEmailPassword(string name,string email, string password)
+        public async Task<FirebaseAuthResponseModel> SignUpwithEmailPassword(string name, string email, string password)
         {
             try
             {
                 FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = true, response = "Successfully signed in" };
                 await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
+       
                 FirebaseAuth.Instance.CurrentUser.SendEmailVerification();
-
+               
                 int ndx = email.IndexOf("@");
                 int cnt = email.Length - ndx;
                 string defaultName = string.IsNullOrEmpty(name) ? email.Remove(ndx, cnt) : name;
-
+                
                 dataClass.loggedInUser = new UserModel()
                 {
-                    Id = int.Parse(FirebaseAuth.Instance.CurrentUser.Uid),
+                    Id = FirebaseAuth.Instance.CurrentUser.Uid,
                     Email = email,
                     Username = name,
                     userType = 0,
                     created_at = DateTime.UtcNow
                 };
+
                 return response;
             }
             catch (Exception ex)

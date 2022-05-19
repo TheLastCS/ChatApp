@@ -21,21 +21,21 @@ namespace ChatApp
         {
             new UserModel()
             {
-                Id = 1,
+                Id = "1",
                 Username = "Jomar M. Leano",
                 Email = "jomarleano@gmail.com",
                 Password = "jomar"
             },
             new UserModel()
             {
-                Id = 2,
+                Id = "2",
                 Username = "Christian Stewart",
                 Email = "christianstewart@gmail.com",
                 Password = "christian",
             },
             new UserModel()
             {
-                Id = 3,
+                Id = "3",
                 Username = "Admin User",
                 Email = "admin@gmail.com",
                 Password = "admin",
