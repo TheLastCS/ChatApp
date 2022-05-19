@@ -34,7 +34,7 @@ namespace ChatApp
             SignInBtn.Clicked += SignIn_Clicked;
         }
         private async void SignIn_Clicked(object sender, EventArgs e)
-        {
+        {   
             if(!string.IsNullOrEmpty(EmailEntry.Text) && !string.IsNullOrEmpty(PasswordEntry.Text))
             {
                 FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { };
@@ -42,11 +42,11 @@ namespace ChatApp
 
                 if(response.status == true)
                 {
-                    Application.Current.MainPage = new TabbedPage(EmailEntry.Text);
+                    Application.Current.MainPage = new TabbedPage();
                 }
                 else
                 {
-                    bool retryBool = await DisplayAlert("Error", response.response+ "Retry", "Yes", "No");
+                    bool retryBool = await DisplayAlert("Error", response.response, "Yes", "No");
                     if (retryBool)
                     {
                         EmailFrame.BorderColor = Color.Red;

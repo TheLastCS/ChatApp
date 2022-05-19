@@ -21,6 +21,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <Label x:Name ="Checker"  Text="" />
                 <Label x:Name="ContactLabel" Text="You have no contacts as of the moment" FontSize="Large" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0"
                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" IsVisible="True"/>
                 <Label x:Name="SearchLabel" Text="User not found" FontSize="Large" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0"

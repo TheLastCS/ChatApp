@@ -1,7 +1,5 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System;
@@ -20,6 +18,7 @@ namespace ChatApp.Droid
     public class FirebaseAuthService : iFirebaseAuth
     {
         DataClass dataClass = DataClass.GetInstance;
+        
 
         public FirebaseAuthResponseModel IsLoggedIn()
         {

@@ -15,20 +15,22 @@ namespace ChatApp
 
     public partial class TabbedPage : Xamarin.Forms.TabbedPage
     {
+        DataClass dataClass = DataClass.GetInstance;
         public TabbedPage()
         {
             InitializeComponent();
-            this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(true);
             NavigationPage.SetHasNavigationBar(this, false);
-        }
-
-        public TabbedPage(string email)
-        {
-            InitializeComponent();
-            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            profilePage.Email = email;
+            profilePage.Email = dataClass.loggedInUser.Email;
+            profilePage.Username = dataClass.loggedInUser.Username;
             this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(true);
-
         }
+        //public TabbedPage(string email)
+        //{
+        //    InitializeComponent();
+        //    Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+        //    profilePage.Email = email;
+        //    this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(true);
+
+        //}
     }
 }

@@ -51,9 +51,10 @@ namespace ChatApp
 
         public ChatPage()
         {
+            DataClass dataClass = DataClass.GetInstance;
             InitializeComponent();
             //this.BindingContext = this;
-            
+            Checker.Text = dataClass.loggedInUser.ToString();
             ViewContactList();
             ContactsListView.ItemTapped += async (object sender, ItemTappedEventArgs e) =>
             {

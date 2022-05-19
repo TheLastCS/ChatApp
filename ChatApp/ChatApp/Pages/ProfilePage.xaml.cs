@@ -12,6 +12,7 @@ namespace ChatApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : ContentPage
     {
+       
         public static readonly BindableProperty UsernameProperty = BindableProperty.Create(nameof(Username), typeof(string), typeof(ProfilePage), "");
         public string Username
         {
@@ -31,8 +32,17 @@ namespace ChatApp
         }
         private async void SignOutBtn_Clicked(object sender, EventArgs e)
         {
-            Application.Current.Properties.Clear();
-            await Application.Current.SavePropertiesAsync();
+            FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { };
+            response = DependencyService.Get<iFirebaseAuth>().SignOut();
+
+            if (response.status)
+            {
+                App.Current.MainPage = new NavigationPage(new MainPage());
+            }
+            else
+            {
+                await DisplayAlert("Error", response.response, "Okay");
+            }
 
             Application.Current.MainPage = new MainPage();
         }
