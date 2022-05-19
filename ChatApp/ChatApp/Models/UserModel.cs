@@ -29,14 +29,6 @@ namespace ChatApp.Models
             get { return _email; }
             set { _email = value; OnPropertyChanged("Email"); }
         }
-
-        private string _password;
-
-        public string Password
-        {
-            get { return _password; }
-            set { _password = value; OnPropertyChanged("Password"); }
-        }     
         
         private int _userType;
         public int userType
