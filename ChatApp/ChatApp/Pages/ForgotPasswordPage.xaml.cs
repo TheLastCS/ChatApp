@@ -31,9 +31,14 @@ namespace ChatApp
         {
             if (!string.IsNullOrEmpty(EmailEntry.Text))
             {
-                await DisplayAlert("Success", "Email has been sent to your Email Address.", "OKAY");
-                Application.Current.MainPage = new MainPage();
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { };
+                response = await DependencyService.Get<iFirebaseAuth>().ResetPassword(EmailEntry.Text);
 
+                if (response.status)
+                {
+                    await DisplayAlert("Sucess", response.response, "Okay");
+                    await Navigation.PopModalAsync();
+                }
             }
             else
             {
