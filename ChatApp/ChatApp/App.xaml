@@ -5,17 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <local:ScaleXAML x:Key="scale"/>
-            <Style x:Key="EntryStyle" TargetType="Entry">
-                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="Margin" Value="{Binding Converter={StaticResource scale}, ConverterParameter='thickness=5,0,5,0'}"/>
-                <Setter Property="Keyboard" Value="Text"/>
-                <Setter Property="ReturnType" Value="Next"/>
-                <Setter Property="TextColor" Value="Black"/>
-                <Setter Property="PlaceholderColor" Value="Gray"/>
-                <Setter Property="FontFamily" Value="Roboto-Thin.ttf#Roboto Thin"/>
-            </Style>
-            <local:isOwnerConverter x:Key="isOwnerConverter"/>
-            <local:isViewerConverter x:Key="isViewerConverter"/>
+            <Style x:Key="EntryStyle" TargetType="Entry" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
