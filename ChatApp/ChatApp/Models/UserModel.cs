@@ -50,5 +50,12 @@ namespace ChatApp.Models
             get { return _created_at; }
             set { _created_at = value; OnPropertyChanged("CreateAt"); }
         }
+
+        private List<string> _contacts;
+        public List<string> contacts
+        {
+            get { return _contacts; }
+            set { _contacts = value; OnPropertyChanged("contacts"); }
+        }
     }
 }

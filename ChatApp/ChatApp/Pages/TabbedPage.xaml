@@ -4,8 +4,8 @@
             xmlns:local="clr-namespace:ChatApp"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            android:TabbedPage.BarItemColor="#01A7E3"
-            android:TabbedPage.BarSelectedItemColor="#00529C"
+            SelectedTabColor="#00529C"
+            UnselectedTabColor="#01A7E3"
             x:Class="ChatApp.TabbedPage">
     <!--Pages can be added as references or inline-->
     <local:ChatPage Title="Chat" IconImageSource="Chat" Padding="5"/>
