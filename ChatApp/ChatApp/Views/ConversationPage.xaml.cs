@@ -1,4 +1,6 @@
-﻿using ChatApp.ViewModels;
+﻿using ChatApp.Pages;
+using ChatApp.ViewModels;
+using Plugin.CloudFirestore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,49 +21,72 @@ namespace ChatApp.Views
         ContactModel userFriend;
         ObservableCollection<ConversationModel> conversation = new ObservableCollection<ConversationModel>();
 
+        [Obsolete]
         public ConversationPage(ContactModel contact)
         {
             InitializeComponent();
             userFriend = contact;
 
             chatName.Text = (userFriend.contactID[0]== dataclass.loggedInUser.Id) ? userFriend.contactName[1] : userFriend.contactName[0];
-            BindingContext = new ChatPageViewModel();
+            getMessage();
 
         }
 
-        public void ScrollTap(object sender, System.EventArgs e)
+        [Obsolete]
+        private async void getMessage()
         {
-            lock (new object())
+            conversationsListView.ItemsSource = conversation;
+            var documents = await CrossCloudFirestore.Current
+                                    .Instance
+                                    .GetCollection("contacts")
+                                    .GetDocument(userFriend.id)
+                                    .GetCollection("conversations")
+                                    .OrderBy("created_at", false)
+                                    .GetDocumentsAsync();
+            var model = documents.ToObjects<ConversationModel>();
+
+            foreach(var data in model)
             {
-                if (BindingContext != null)
-                {
-                    var vm = BindingContext as ChatPageViewModel; //returns null because bindingcontext refers to usermodel not chatpageviewmodel
-                   
-                    if(vm is null)
-                    {
-                        Console.WriteLine("Hello"+vm+ "Hahah");
-                    }
-
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        while (vm.DelayedMessages.Count > 0)
-                        {
-                            vm.Messages.Insert(0, vm.DelayedMessages.Dequeue());
-                        }
-                        vm.ShowScrollTap = false;
-                        vm.LastMessageVisible = true;
-                        vm.PendingMessageCount = 0;
-                        ChatList?.ScrollToFirst();
-                    });
-
-
-                }
-
+                conversation.Add(new ConversationModel { converseeID = data.id, message = data.message, created_at = data.created_at });
             }
+            var convo = conversationsListView.ItemsSource.Cast<object>().LastOrDefault();
+            conversationsListView.ScrollTo(convo, ScrollToPosition.End, false);
+
+            noChatLabel.IsVisible = conversation.Count == 0;
+            conversationsListView.IsVisible = !(conversation.Count == 0);
         }
-        public void OnListTapped(object sender, ItemTappedEventArgs e)
+
+        [Obsolete]
+        private void ButtonBack_Clicked(object sender, EventArgs e)
         {
-            chatInput.UnFocusEntry();
+            Application.Current.MainPage = new ChatPage();
+        }
+
+        [Obsolete]
+        private async void SendButton_Clicked(object sender, EventArgs e)
+        {
+            noChatLabel.IsVisible = false;
+            conversationsListView.IsVisible = true;
+
+            ConversationModel convoSave = new ConversationModel()
+            {
+                id = Randomizer.generateID(),
+                converseeID = dataclass.loggedInUser.Id,
+                message = entryMessage.Text,
+                created_at = DateTime.UtcNow
+            };
+
+            await CrossCloudFirestore.Current
+                .Instance
+                .GetCollection("contacts")
+                .GetDocument(userFriend.id)
+                .GetCollection("conversations")
+                .GetDocument(convoSave.id)
+                .SetDataAsync(convoSave);
+
+            conversationsListView.ItemsSource = conversation;
+            conversation.Add(new ConversationModel() { converseeID = dataclass.loggedInUser.Id, message = entryMessage.Text });
+            entryMessage.Text = "";
         }
     }
 }
