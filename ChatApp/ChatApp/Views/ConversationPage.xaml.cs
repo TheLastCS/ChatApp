@@ -1,6 +1,7 @@
 ﻿using ChatApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,17 @@ namespace ChatApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ConversationPage : ContentPage
     {
+        DataClass dataclass = DataClass.GetInstance;
+        ContactModel userFriend;
+        ObservableCollection<ConversationModel> conversation = new ObservableCollection<ConversationModel>();
+
         public ConversationPage(ContactModel contact)
         {
             InitializeComponent();
-            this.BindingContext = new ChatPageViewModel();
+            userFriend = contact;
+
+            chatName.Text = (userFriend.contactID[0]== dataclass.loggedInUser.Id) ? userFriend.contactName[1] : userFriend.contactName[0];
+            BindingContext = new ChatPageViewModel();
 
         }
 
