@@ -10,7 +10,7 @@
 
         <StackLayout BackgroundColor="White">
             <Frame Padding="-10,5,5,5" BackgroundColor="Transparent" Margin="10,10,10,10" BorderColor="#00529C" CornerRadius="15" >
-                <SearchBar x:Name="SearchEntry" Placeholder="Search for friends" Keyboard="Email" Margin="5" FontSize="Subtitle" TextColor="#000000" TextChanged="SearchEntry_TextChanged"></SearchBar>
+                <Entry x:Name="SearchEntry" Placeholder="Search for friends" Keyboard="Email" Margin="5" FontSize="Subtitle" TextColor="#000000" TextChanged="SearchEntry_TextChanged" ReturnType="Search" Completed="SearchEntry_Completed"></Entry>
             </Frame>
 
             <Grid VerticalOptions="StartAndExpand" >
@@ -21,18 +21,29 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name ="Checker"  Text="" />
+                <!--Label for no contacts found-->
                 <Label x:Name="ContactLabel" Text="You have no contacts as of the moment" FontSize="Large" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0"
                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" IsVisible="True"/>
-                <Label x:Name="SearchLabel" Text="User not found" FontSize="Large" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" Padding="0"
-                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" IsVisible="False"/>
+
+                <!--View for contacts-->
                 <ListView x:Name="ContactsListView" SeparatorVisibility="Default" HasUnevenRows="True" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="1" IsVisible="False" BackgroundColor="Transparent">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Frame Padding="2" BorderColor="LightGray" Margin="10,5,10,5" CornerRadius="10" HasShadow="True">
+                                    <Frame.Triggers>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding contactID, Converter={StaticResource isOwnerConverter}}" Value="True">
+                                            <Setter Property="BorderColor" Value="LightGreen"/>
+                                        </DataTrigger>
+                                    </Frame.Triggers>
                                     <StackLayout ClassId="{Binding Id}" VerticalOptions="StartAndExpand" Margin="10,5,10,8" HeightRequest="50">
-                                        <Label Text="{Binding Username}" FontSize="Medium" TextColor="#00529C"/>
+                                        <Label Text="{Binding contactName[0]}" FontSize="Medium" TextColor="#00529C">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding contactID, Converter={StaticResource isOwnerConverter}}" Value="True">
+                                                    <Setter Property="Text" Value="{Binding contactName[1]}"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
                                         <Line Stroke="LightGray" StrokeThickness="2" StrokeDashArray="3,1" X2="150"></Line>
                                         <Label Text="{Binding Email}" FontSize="Small" TextColor="Black" Margin="0,-5,0,0"/>
                                     </StackLayout>
@@ -41,8 +52,10 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
-                <ListView x:Name="SearchedListView" SeparatorVisibility="Default" HasUnevenRows="True" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="1" IsVisible="False" BackgroundColor="Transparent">
+                
+                
+                <!--View for searches-->
+                <ListView x:Name="SearchedListView" SeparatorVisibility="Default" HasUnevenRows="True" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="1" IsVisible="False" BackgroundColor="Transparent" ItemSelected="SearchedListView_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -57,6 +70,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                
             </Grid>
         </StackLayout>
     </ContentPage.Content>

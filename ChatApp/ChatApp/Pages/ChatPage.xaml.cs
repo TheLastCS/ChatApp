@@ -1,6 +1,7 @@
 ﻿using ChatApp.Helpers;
 using ChatApp.Models;
 using ChatApp.Views;
+using Plugin.CloudFirestore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,121 +17,79 @@ namespace ChatApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChatPage : ContentPage
     {
-        ObservableCollection<UserModel> friendContactList = new ObservableCollection<UserModel>();
-        ObservableCollection<UserModel> allContactList = new ObservableCollection<UserModel>()
-        {
-            new UserModel()
-            {
-                Id = "1",
-                Username = "Jomar M. Leano",
-                Email = "jomarleano@gmail.com",
-     
-            },
-            new UserModel()
-            {
-                Id = "2",
-                Username = "Christian Stewart",
-                Email = "christianstewart@gmail.com",
-      
-            },
-            new UserModel()
-            {
-                Id = "3",
-                Username = "Admin User",
-                Email = "admin@gmail.com",
-            }
-        };
+        DataClass dataclass = DataClass.GetInstance;
 
-        //Temporary
-        //private ObservableCollection<UserModel> ContactList;
-        //public ObservableCollection<UserModel> getContacts
-        //{
-        //    get { return ContactList; }
-        //    set { ContactList = value; }
-        //}
-
+        [Obsolete]
         public ChatPage()
         {
-            DataClass dataClass = DataClass.GetInstance;
             InitializeComponent();
-            //this.BindingContext = this;
-            if (dataClass.loggedInUser.Username == "")
-            {
-                Checker.Text = "empty";
-            }else if(dataClass.loggedInUser.Username == null)
-            {
-                Checker.Text = "null";
-            }
-            
-            ViewContactList();
-            ContactsListView.ItemTapped += async (object sender, ItemTappedEventArgs e) =>
-            {
-                var user = (UserModel)e.Item;
-                var userChat = new ConversationPage()
-                {
-                    BindingContext = user
-                };
-                await Navigation.PushModalAsync(userChat);
-            };
-            SearchedListView.ItemTapped += async (object sender, ItemTappedEventArgs e) =>
-            {
-                var user = (UserModel)e.Item;
-                
-                UserModel userModel = friendContactList.FirstOrDefault(u => u.Id.Equals(user.Id));
-                if (userModel is null)
-                {
-                    friendContactList.Add(allContactList.FirstOrDefault(u => u.Id.Equals(user.Id)));
-                    await DisplayAlert("Sucess", "Added user to contacts", "Confirm");
-                }
-                else
-                {
-                    await DisplayAlert("Error", "User already in contacts", "Confirm");
-                }
-            };
-
-
+            retrieveContactList();
         }
-
-        private void ViewContactList()
+        //This method collects all the contacts of the user logged in
+        [Obsolete]
+        private async void retrieveContactList()
         {
-           ContactsListView.ItemsSource = friendContactList;
+            ObservableCollection<ContactModel> contacts = new ObservableCollection<ContactModel>();
+            ContactsListView.ItemsSource = contacts;
+
+            var document = await CrossCloudFirestore.Current.Instance
+                                    .GetCollection("contacts")
+                                    .WhereArrayContains("contactID", dataclass.loggedInUser.Id)
+                                    .GetDocumentsAsync();
+            var model = document.ToObjects<ContactModel>();
+            foreach(var data in model)
+            {
+                contacts.Add(new ContactModel() { id= data.id, contactID = data.contactID, contactEmail = data.contactEmail, contactName = data.contactName, created_at = data.created_at });
+            }
+            ContactLabel.IsVisible = contacts.Count == 0;
+            ContactsListView.IsVisible = !(contacts.Count == 0);
         }
 
+        [Obsolete]
         private void SearchEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SearchBar searchBar = (SearchBar)sender;
-            if (!string.IsNullOrEmpty(searchBar.Text))
+            if (SearchEntry.Text == "")
             {
-                SearchedListView.ItemsSource = allContactList.Where(u => u.Email.ToLower().Contains(SearchEntry.Text.ToLower())).ToList();
-                ContactLabel.IsVisible = false;
-                ContactsListView.IsVisible = false;
-                SearchedListView.IsVisible = true;
-            }
-            else
-            {
-                if(friendContactList.Count <= 0 && string.IsNullOrEmpty(searchBar.Text))
-                {
-                    ContactLabel.IsVisible = true;
-                    SearchedListView.IsVisible = false;
-                    SearchLabel.IsVisible = false;
-                }
-                else
-                {
-                    ContactLabel.IsVisible = false;
-                    ContactsListView.IsVisible = true;
-                    SearchedListView.IsVisible = false;
-                }
-            }
-            if (allContactList.Where(u => u.Email.ToLower().Contains(SearchEntry.Text.ToLower())).ToList().Count <=0)
-            {
-                SearchLabel.IsVisible = true;
-                ContactLabel.IsVisible = false;
-                ContactsListView.IsVisible = false;
                 SearchedListView.IsVisible = false;
+                retrieveContactList();
+            }
+           
+        }
+
+        [Obsolete]
+        private async void SearchEntry_Completed(object sender, EventArgs e)
+        {
+            ObservableCollection<UserModel> data = new ObservableCollection<UserModel>();
+
+            ContactsListView.IsVisible = false;
+            ContactLabel.IsVisible = false;
+            SearchedListView.IsVisible = true;
+
+            var documents = await CrossCloudFirestore.Current
+                            .Instance
+                            .GetCollection("users")
+                            .WhereEqualsTo("Email", SearchEntry.Text)
+                            .GetDocumentsAsync();
+
+            var model = documents.ToObjects<UserModel>();
+
+            SearchedListView.ItemsSource = data;
+
+            foreach (var mod in model)
+            {
+                data.Add(new UserModel() { Id = mod.Id, Username = mod.Username, Email = mod.Email, userType = mod.userType });
+            }
+
+            if (data.Count == 0)
+            {
+                await DisplayAlert("", "User not Found.", "Okay");
+                SearchEntry.Text = "";
             }
         }
 
-     
+        private void SearchedListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
 
+        }
     }
 }
