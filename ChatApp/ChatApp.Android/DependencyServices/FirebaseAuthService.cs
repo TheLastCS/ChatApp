@@ -146,14 +146,15 @@ namespace ChatApp.Droid
                 int ndx = email.IndexOf("@");
                 int cnt = email.Length - ndx;
                 string defaultName = string.IsNullOrEmpty(name) ? email.Remove(ndx, cnt) : name;
-                
+
                 dataClass.loggedInUser = new UserModel()
                 {
                     Id = FirebaseAuth.Instance.CurrentUser.Uid,
                     Email = email,
                     Username = name,
                     userType = 0,
-                    created_at = DateTime.UtcNow
+                    created_at = DateTime.UtcNow,
+                    contacts = new List<string>() { }
                 };
 
                 return response;

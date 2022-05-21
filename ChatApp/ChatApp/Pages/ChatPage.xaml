@@ -45,7 +45,14 @@
                                             </Label.Triggers>
                                         </Label>
                                         <Line Stroke="LightGray" StrokeThickness="2" StrokeDashArray="3,1" X2="150"></Line>
-                                        <Label Text="{Binding Email}" FontSize="Small" TextColor="Black" Margin="0,-5,0,0"/>
+                                        
+                                        <Label Text="{Binding contactEmail[0]}" FontSize="Small" TextColor="Black" Margin="0,-5,0,0">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding contactID, Converter={StaticResource isOwnerConverter}}" Value="True">
+                                                    <Setter Property="Text" Value="{Binding contactEmail[1]}"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
                                     </StackLayout>
                                 </Frame>
                             </ViewCell>
@@ -55,12 +62,15 @@
                 
                 
                 <!--View for searches-->
-                <ListView x:Name="SearchedListView" SeparatorVisibility="Default" HasUnevenRows="True" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="1" IsVisible="False" BackgroundColor="Transparent" ItemSelected="SearchedListView_ItemSelected">
+                <ListView x:Name="SearchedListView" SeparatorVisibility="Default" HasUnevenRows="True" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="1" IsVisible="False" 
+                          BackgroundColor="Transparent" 
+                          ItemSelected="SearchedListView_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Frame Padding="2" BorderColor="White" Margin="10,5,10,5" CornerRadius="10" HasShadow="True" BackgroundColor="WhiteSmoke">
-                                    <StackLayout ClassId="{Binding Id}" VerticalOptions="StartAndExpand" Margin="10,5,10,8" HeightRequest="50">
+                                    <StackLayout VerticalOptions="StartAndExpand" Margin="10,5,10,8" HeightRequest="50">
+                                        <Label Text="{Binding Id}" IsVisible="false" />
                                         <Label Text="{Binding Username}" FontSize="Medium" TextColor="Black"/>
                                         <Line Stroke="LightGray" StrokeThickness="2" StrokeDashArray="3,1" X2="150"></Line>
                                         <Label Text="{Binding Email}" FontSize="Small" TextColor="#00529C" Margin="0,-5,0,0"/>
@@ -70,7 +80,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                
             </Grid>
         </StackLayout>
     </ContentPage.Content>

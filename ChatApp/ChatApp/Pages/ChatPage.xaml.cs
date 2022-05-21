@@ -1,5 +1,6 @@
 ﻿using ChatApp.Helpers;
 using ChatApp.Models;
+using ChatApp.Pages;
 using ChatApp.Views;
 using Plugin.CloudFirestore;
 using System;
@@ -53,7 +54,11 @@ namespace ChatApp
                 SearchedListView.IsVisible = false;
                 retrieveContactList();
             }
-           
+            else
+            {
+                ContactLabel.IsVisible = false;
+                SearchedListView.IsVisible = true;
+            }
         }
 
         [Obsolete]
@@ -87,8 +92,89 @@ namespace ChatApp
             }
         }
 
-        private void SearchedListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        [Obsolete]
+        private async void SearchedListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            var flag = 0;
+            if (e.SelectedItem == null)
+                return;
+
+            var user = (UserModel)e.SelectedItem;
+          
+            var documents = await CrossCloudFirestore.Current.Instance
+                                    .GetCollection("users")
+                                    .WhereEqualsTo("Id", dataclass.loggedInUser.Id)
+                                    .GetDocumentsAsync();
+            var model = documents.ToObjects<UserModel>();
+            //Double forloop for searching the entire contacts and flag if user found
+            foreach (var data in model)
+            {
+                for (int x = 0; x < data.contacts.Count; x++)
+                {
+                    if (data.contacts[x] == user.Id)
+                    {
+                        flag++;
+                        break;
+                    }
+                }
+            }
+
+            if (flag == 0)
+            {
+                bool choice = await DisplayAlert("Add Contact", "Would you like to add " + user.Username, "Yes", "No");
+                //Bool for adding the person searched
+                if (choice)
+                {
+                    //Check if user is not the owner so that he can't add himself
+                    if (user.Email != dataclass.loggedInUser.Email)
+                    {
+                        ContactModel contact = new ContactModel()
+                        {
+                            id = Randomizer.generateID(),
+                            contactID = new string[] { dataclass.loggedInUser.Id, user.Id },
+                            contactEmail = new string[] { dataclass.loggedInUser.Email, user.Email },
+                            contactName = new string[] { dataclass.loggedInUser.Username, user.Username },
+                            created_at = DateTime.UtcNow
+                        };
+
+                        await CrossCloudFirestore.Current
+                            .Instance
+                            .GetCollection("contacts")
+                            .GetDocument(contact.id)
+                            .SetDataAsync(contact);
+                        if (dataclass.loggedInUser.contacts == null)
+                            dataclass.loggedInUser.contacts = new List<string>();
+                        //update contacts of the owner
+                        dataclass.loggedInUser.contacts.Add(user.Id);
+                        await CrossCloudFirestore.Current
+                            .Instance
+                            .GetCollection("users")
+                            .GetDocument(dataclass.loggedInUser.Id)
+                            .UpdateAsync(new { contacts = dataclass.loggedInUser.contacts });
+                        //update contact view to the friend added by the owner
+                        if (user.contacts == null)
+                            user.contacts = new List<string>();
+
+                        user.contacts.Add(dataclass.loggedInUser.Id);
+                        await CrossCloudFirestore.Current
+                            .Instance
+                            .GetCollection("users")
+                            .GetDocument(user.Id)
+                            .UpdateAsync(new { contacts = user.contacts });
+                        await DisplayAlert("Sucess", "You and " + user.Username + " are now Friends", "Okay");
+                    }
+                    else
+                    {
+                        await DisplayAlert("", "You can't add yourself", "Okay");
+                    }
+                    SearchEntry.Text = "";
+                }
+            }
+            else
+            {
+                await DisplayAlert("", "You and " + user.Username + " are already friends", "Okay");
+            }
+            ((ListView)sender).SelectedItem = null;
 
         }
     }
