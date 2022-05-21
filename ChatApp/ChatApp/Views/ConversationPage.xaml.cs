@@ -14,7 +14,7 @@ namespace ChatApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ConversationPage : ContentPage
     {
-        public ConversationPage()
+        public ConversationPage(ContactModel contact)
         {
             InitializeComponent();
             this.BindingContext = new ChatPageViewModel();

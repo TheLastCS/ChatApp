@@ -23,16 +23,6 @@
                  Grid.Column="0"
                  Completed="Handle_Completed"
                  WidthRequest="170"/>
-        <!--<Label Text="Send"
-               Grid.Row="0"
-               Grid.Column="1"
-               VerticalTextAlignment="Center">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer
-                      Command="{Binding OnSendCommand}"
-                      Tapped="Handle_Completed"/>
-            </Label.GestureRecognizers>
-        </Label>-->
         <Button ImageSource="SendButton" Grid.Row="0"
                Grid.Column="1" BackgroundColor="Transparent" HeightRequest="40" Margin="5, 10,-20, 10" HorizontalOptions="End">
             <Button.GestureRecognizers>

@@ -26,6 +26,7 @@ namespace ChatApp
             InitializeComponent();
             retrieveContactList();
         }
+
         //This method collects all the contacts of the user logged in
         [Obsolete]
         private async void retrieveContactList()
@@ -176,6 +177,17 @@ namespace ChatApp
             }
             ((ListView)sender).SelectedItem = null;
 
+        }
+
+        private void ContactsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null)
+                return;
+            var contact = (ContactModel)e.SelectedItem;
+
+            Application.Current.MainPage = new ConversationPage(contact);
+
+            ((ListView)sender).SelectedItem = null;
         }
     }
 }

@@ -26,7 +26,8 @@
                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" IsVisible="True"/>
 
                 <!--View for contacts-->
-                <ListView x:Name="ContactsListView" SeparatorVisibility="Default" HasUnevenRows="True" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="1" IsVisible="False" BackgroundColor="Transparent">
+                <ListView x:Name="ContactsListView" SeparatorVisibility="Default" HasUnevenRows="True" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="1" IsVisible="False" BackgroundColor="Transparent"
+                          ItemSelected="ContactsListView_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
