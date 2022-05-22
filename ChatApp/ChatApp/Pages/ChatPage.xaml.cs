@@ -19,15 +19,32 @@ namespace ChatApp
     public partial class ChatPage : ContentPage
     {
         DataClass dataclass = DataClass.GetInstance;
+        ObservableCollection<UserModel> allUsers = new ObservableCollection<UserModel>();
 
         [Obsolete]
         public ChatPage()
         {
             InitializeComponent();
+            collectAllUsers();
             retrieveContactList();
         }
 
         //This method collects all the contacts of the user logged in
+
+        [Obsolete]
+        private async void collectAllUsers()
+        {
+            var documents = await CrossCloudFirestore.Current
+                          .Instance
+                          .GetCollection("users")
+                          .GetDocumentsAsync();
+
+            var model = documents.ToObjects<UserModel>();
+            foreach (var data in model)
+            {
+                allUsers.Add(new UserModel() { Id = data.Id, Username = data.Username, Email = data.Email, userType = data.userType });
+            }
+        }
         [Obsolete]
         private async void retrieveContactList()
         {
@@ -50,6 +67,14 @@ namespace ChatApp
         [Obsolete]
         private void SearchEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
+            Entry searchbar = (Entry)sender;
+            if (!string.IsNullOrEmpty(SearchEntry.Text))
+            {
+                ContactsListView.IsVisible = false;
+                ContactLabel.IsVisible = false;
+                SearchedListView.IsVisible = true;
+                SearchedListView.ItemsSource = allUsers.Where(u => u.Email.ToLower().Contains(SearchEntry.Text.ToLower())).ToList();
+            }
             if (SearchEntry.Text == "")
             {
                 SearchedListView.IsVisible = false;
@@ -64,9 +89,8 @@ namespace ChatApp
 
         [Obsolete]
         private async void SearchEntry_Completed(object sender, EventArgs e)
-        {
+        { 
             ObservableCollection<UserModel> data = new ObservableCollection<UserModel>();
-
             ContactsListView.IsVisible = false;
             ContactLabel.IsVisible = false;
             SearchedListView.IsVisible = true;
@@ -179,6 +203,7 @@ namespace ChatApp
 
         }
 
+        [Obsolete]
         private void ContactsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
