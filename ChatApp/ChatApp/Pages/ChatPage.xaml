@@ -9,8 +9,10 @@
     <ContentPage.Content>
 
         <StackLayout BackgroundColor="White">
-            <Frame Padding="-10,5,5,5" BackgroundColor="Transparent" Margin="10,10,10,10" BorderColor="#00529C" CornerRadius="15" >
-                <Entry x:Name="SearchEntry" Placeholder="Search for friends" Keyboard="Email" Margin="5" FontSize="Subtitle" TextColor="#000000" TextChanged="SearchEntry_TextChanged" ReturnType="Search" Completed="SearchEntry_Completed"></Entry>
+            <Frame Padding="-10,5,5,5" BackgroundColor="Transparent" Margin="10,10,10,20" BorderColor="#00529C" CornerRadius="15" >
+                <Entry x:Name="SearchEntry" Placeholder="Search for friends" PlaceholderColor="LightGray" Keyboard="Email" Margin="20,5,6,5" FontSize="Subtitle" TextColor="#000000" TextChanged="SearchEntry_TextChanged" ReturnType="Search" Completed="SearchEntry_Completed"
+                       ClearButtonVisibility="WhileEditing"/>
+                
             </Frame>
 
             <Grid VerticalOptions="StartAndExpand" >

@@ -11,7 +11,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Frame Padding="0, 0, 0, 0" BackgroundColor="#01A7E3">
+            <Frame Padding="0" BackgroundColor="#01A7E3">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -19,10 +19,10 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- ChatName Friend-->
-                    <Label x:Name="chatName" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center" Margin="15" Padding="20, 5, 0, 0"  FontSize="22"/>
+                    <Label x:Name="chatName" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" Margin="15" Padding="0, 0, 0, 0"  FontSize="Title"/>
 
                     <!-- Button for close -->
-                    <Button Text="X" Margin="0,0,0,0" Padding="0, 0, 0, 0" WidthRequest="40" TextColor="white" BackgroundColor="Transparent" HorizontalOptions="End" Clicked="ButtonBack_Clicked"/>
+                    <Button ImageSource="BackButton" Margin="10,5,0,5" Padding="10" WidthRequest="40" BackgroundColor="Transparent" HorizontalOptions="Start" Clicked="ButtonBack_Clicked"/>
                 </Grid>
             </Frame>
             <!-- Shows if there is not conversations -->
@@ -33,7 +33,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <ContentView>
-                                <StackLayout BackgroundColor="#00092C" Margin="5,5,30,5" HorizontalOptions="Start">
+                                <StackLayout BackgroundColor="#99aab5" Margin="5,5,30,5" HorizontalOptions="Start">
                                     <StackLayout.Triggers>
                                         <DataTrigger TargetType="StackLayout" Binding="{Binding ., Converter={StaticResource isViewerConverter}}" Value="True">
                                             <Setter Property="BackgroundColor" Value="#01A7E3"></Setter>
@@ -64,7 +64,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Text box -->
-                    <Editor Grid.Column="0" Grid.Row="0" BackgroundColor="White" MaxLength="240" x:Name="entryMessage" AutoSize="TextChanges" Placeholder="Type a Message"/>
+                    <Editor Grid.Column="0" Grid.Row="0" BackgroundColor="White" MaxLength="240" x:Name="entryMessage" AutoSize="TextChanges" Placeholder="Type a Message" PlaceholderColor="LightGray" TextColor="Black" />
 
 
                     <!-- Send button -->
