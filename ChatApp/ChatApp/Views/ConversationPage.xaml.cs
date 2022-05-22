@@ -57,7 +57,7 @@ namespace ChatApp.Views
         }
 
         [Obsolete]
-        private async void ButtonBack_Clicked(object sender, EventArgs e)
+        private void ButtonBack_Clicked(object sender, EventArgs e)
         {
             Application.Current.MainPage = new TabbedPage();
         }
@@ -65,29 +65,38 @@ namespace ChatApp.Views
         [Obsolete]
         private async void SendButton_Clicked(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(entryMessage.Text)) { 
-            noChatLabel.IsVisible = false;
-            conversationsListView.IsVisible = true;
+            if (!string.IsNullOrEmpty(entryMessage.Text)) {
+                if(entryMessage.Text.Length <= 240)
+                {
+                    noChatLabel.IsVisible = false;
+                    conversationsListView.IsVisible = true;
 
-            ConversationModel convoSave = new ConversationModel()
-            {
-                id = Randomizer.generateID(),
-                converseeID = dataclass.loggedInUser.Id,
-                message = entryMessage.Text,
-                created_at = DateTime.UtcNow
-            };
+                    ConversationModel convoSave = new ConversationModel()
+                    {
+                    id = Randomizer.generateID(),
+                    converseeID = dataclass.loggedInUser.Id,
+                    message = entryMessage.Text,
+                    created_at = DateTime.UtcNow
+                    };
 
-            await CrossCloudFirestore.Current
-                .Instance
-                .GetCollection("contacts")
-                .GetDocument(userFriend.id)
-                .GetCollection("conversations")
-                .GetDocument(convoSave.id)
-                .SetDataAsync(convoSave);
+                    await CrossCloudFirestore.Current
+                        .Instance
+                        .GetCollection("contacts")
+                        .GetDocument(userFriend.id)
+                        .GetCollection("conversations")
+                        .GetDocument(convoSave.id)
+                        .SetDataAsync(convoSave);
 
-            conversationsListView.ItemsSource = conversation;
-            conversation.Add(new ConversationModel() { converseeID = dataclass.loggedInUser.Id, message = entryMessage.Text });
-            entryMessage.Text = "";
+                    conversationsListView.ItemsSource = conversation;
+                    conversation.Add(new ConversationModel() { converseeID = dataclass.loggedInUser.Id, message = entryMessage.Text });
+                    entryMessage.Text = "";
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Maximum of 240 words only", "Okay");
+                    entryMessage.Text = "";
+                }
+         
             }
             else
             {
