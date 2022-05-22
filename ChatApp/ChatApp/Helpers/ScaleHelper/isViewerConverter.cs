@@ -12,6 +12,7 @@ namespace ChatApp.Helpers.ScaleHelper
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            
             bool retVal = false;
             if (value != null)
             {
@@ -24,6 +25,7 @@ namespace ChatApp.Helpers.ScaleHelper
             {
                 retVal = true;
             }
+            
             return retVal;
         }
 

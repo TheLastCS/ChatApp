@@ -47,7 +47,7 @@ namespace ChatApp.Views
 
             foreach(var data in model)
             {
-                conversation.Add(new ConversationModel { converseeID = data.id, message = data.message, created_at = data.created_at });
+                conversation.Add(new ConversationModel { converseeID = data.converseeID, message = data.message, created_at = data.created_at });
             }
             var convo = conversationsListView.ItemsSource.Cast<object>().LastOrDefault();
             conversationsListView.ScrollTo(convo, ScrollToPosition.End, false);
@@ -57,14 +57,15 @@ namespace ChatApp.Views
         }
 
         [Obsolete]
-        private void ButtonBack_Clicked(object sender, EventArgs e)
+        private async void ButtonBack_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new ChatPage();
+            Application.Current.MainPage = new TabbedPage();
         }
 
         [Obsolete]
         private async void SendButton_Clicked(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(entryMessage.Text)) { 
             noChatLabel.IsVisible = false;
             conversationsListView.IsVisible = true;
 
@@ -87,6 +88,16 @@ namespace ChatApp.Views
             conversationsListView.ItemsSource = conversation;
             conversation.Add(new ConversationModel() { converseeID = dataclass.loggedInUser.Id, message = entryMessage.Text });
             entryMessage.Text = "";
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void DataTrigger_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+
         }
     }
 }

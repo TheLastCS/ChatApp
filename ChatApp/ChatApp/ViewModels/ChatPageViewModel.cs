@@ -5,10 +5,11 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 using ChatApp.Models;
+using ChatApp.Core;
 
 namespace ChatApp.ViewModels
 {
-    public class ChatPageViewModel : INotifyPropertyChanged
+    public class ChatPageViewModel : ObservableObject
     {
         public bool ShowScrollTap { get; set; } = false;
         public bool LastMessageVisible { get; set; } = true;
@@ -74,10 +75,7 @@ namespace ChatApp.ViewModels
                     ShowScrollTap = true;
                     LastMessageVisible = false;
                 });
-
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

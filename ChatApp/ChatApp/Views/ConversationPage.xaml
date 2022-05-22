@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChatApp.Views.ConversationPage"
-             xmlns:local="clr-namespace:ChatApp.Helpers" xmlns:views="clr-namespace:ChatApp.Views"
-             xmlns:controls="clr-namespace:ChatApp.Controls">
+             xmlns:local="clr-namespace:ChatApp.Helpers">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:ChatSelectorHelper x:Key="MessageTemplateSelector"/>
@@ -35,13 +34,14 @@
                             <ContentView>
                                 <StackLayout BackgroundColor="#99aab5" Margin="5,5,30,5" HorizontalOptions="Start">
                                     <StackLayout.Triggers>
-                                        <DataTrigger TargetType="StackLayout" Binding="{Binding ., Converter={StaticResource isViewerConverter}}" Value="True">
+                                        <DataTrigger TargetType="StackLayout" Binding="{Binding Converter={StaticResource isViewerConverter}}" Value="True">
                                             <Setter Property="BackgroundColor" Value="#01A7E3"></Setter>
                                             <Setter Property="HorizontalOptions" Value="End"></Setter>
                                             <Setter Property="Margin" Value="30,5,5,5"></Setter>
                                         </DataTrigger>
                                     </StackLayout.Triggers>
-                                    <Label Text="{Binding message}" Margin="10,5,10,5" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="End" FontSize="Body" TextColor="white" FontFamily="Poppins-Light">
+                                    <Label Text="{Binding message}" Margin="10,5,10,5" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="End" FontSize="Body" 
+                                           TextColor="white">
                                     </Label>
                                 </StackLayout>
                             </ContentView>
