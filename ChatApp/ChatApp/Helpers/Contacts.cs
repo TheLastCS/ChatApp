@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChatApp.Helpers
+namespace ChatApp_Leano_Stewart.Helpers
 {
     public class Contacts
     {

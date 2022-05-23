@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ChatApp.Droid;
+using ChatApp_Leano_Stewart.Droid;
 using Xamarin.Forms;
 using Firebase.Auth;
-using ChatApp.Models;
+using ChatApp_Leano_Stewart.Models;
 using Plugin.CloudFirestore;
 
 [assembly: Dependency(typeof(FirebaseAuthService))]
-namespace ChatApp.Droid
+namespace ChatApp_Leano_Stewart.Droid
 {
     public class FirebaseAuthService : iFirebaseAuth
     {

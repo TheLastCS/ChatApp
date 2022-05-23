@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ChatApp
+namespace ChatApp_Leano_Stewart
 {
     public interface iFirebaseAuth
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace ChatApp.Controls
+namespace ChatApp_Leano_Stewart.Controls
 {
     public class ExtendedEditorControl : Editor
     {

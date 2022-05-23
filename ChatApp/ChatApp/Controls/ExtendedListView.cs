@@ -5,7 +5,7 @@ using Xamarin.Forms;
 using System.Linq;
 using System.Windows.Input;
 
-namespace ChatApp.Controls
+namespace ChatApp_Leano_Stewart.Controls
 {
     public class ExtendedListView : ListView
     {

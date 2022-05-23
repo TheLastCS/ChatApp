@@ -1,9 +1,9 @@
-﻿using ChatApp.Core;
+﻿using ChatApp_Leano_Stewart.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChatApp
+namespace ChatApp_Leano_Stewart
 {
     public class ConversationModel : ObservableObject
     {

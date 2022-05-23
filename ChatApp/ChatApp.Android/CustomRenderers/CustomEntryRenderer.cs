@@ -6,8 +6,8 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using ChatApp;
-using ChatApp.Droid;
+using ChatApp_Leano_Stewart;
+using ChatApp_Leano_Stewart.Droid;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer (typeof(CustomEntry), typeof(CustomEntryRenderer))]
-namespace ChatApp.Droid
+namespace ChatApp_Leano_Stewart.Droid
 {
     public class CustomEntryRenderer : EntryRenderer
     {

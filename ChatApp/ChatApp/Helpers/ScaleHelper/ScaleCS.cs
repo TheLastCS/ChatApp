@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace ChatApp.Helpers
+namespace ChatApp_Leano_Stewart.Helpers
 {
     public static class ScaleCS
     {

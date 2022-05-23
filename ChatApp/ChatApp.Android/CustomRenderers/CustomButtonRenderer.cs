@@ -1,11 +1,11 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using ChatApp;
-using ChatApp.Droid;
+using ChatApp_Leano_Stewart;
+using ChatApp_Leano_Stewart.Droid;
 using Android.Content;
 
 [assembly: ExportRenderer(typeof(CustomButton), typeof(CustomButtonRenderer))]
-namespace ChatApp.Droid
+namespace ChatApp_Leano_Stewart.Droid
 {
     class CustomButtonRenderer : ButtonRenderer
     {

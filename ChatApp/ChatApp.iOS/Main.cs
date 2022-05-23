@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace ChatApp.iOS
+namespace ChatApp_Leano_Stewart.iOS
 {
     public class Application
     {

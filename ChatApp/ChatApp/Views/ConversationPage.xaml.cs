@@ -1,5 +1,5 @@
-﻿using ChatApp.Pages;
-using ChatApp.ViewModels;
+﻿using ChatApp_Leano_Stewart.Pages;
+using ChatApp_Leano_Stewart.ViewModels;
 using Plugin.CloudFirestore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ChatApp.Views
+namespace ChatApp_Leano_Stewart.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ConversationPage : ContentPage

@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ChatApp
+namespace ChatApp_Leano_Stewart
 {
     public partial class App : Application
     {

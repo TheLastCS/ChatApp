@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ChatApp.Core;
-using ChatApp.Models;
+using ChatApp_Leano_Stewart.Core;
+using ChatApp_Leano_Stewart.Models;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
-namespace ChatApp
+namespace ChatApp_Leano_Stewart
 {
     public class DataClass : ObservableObject
     {

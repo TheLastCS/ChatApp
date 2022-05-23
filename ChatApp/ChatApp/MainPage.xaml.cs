@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using ChatApp.ViewModels;
-using ChatApp.Helpers;
+using ChatApp_Leano_Stewart.ViewModels;
+using ChatApp_Leano_Stewart.Helpers;
 
-namespace ChatApp
+namespace ChatApp_Leano_Stewart
 {
     public partial class MainPage : ContentPage
     {

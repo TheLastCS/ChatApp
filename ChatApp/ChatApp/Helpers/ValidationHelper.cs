@@ -6,7 +6,7 @@ using Xamarin.Forms;
 using System.Linq;
 using System.Reflection;
 
-namespace ChatApp.Helpers
+namespace ChatApp_Leano_Stewart.Helpers
 {
     public static class ValidationHelper
     {

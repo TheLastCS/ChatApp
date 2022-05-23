@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ChatApp.Views
+namespace ChatApp_Leano_Stewart.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OutgoingViewCell : ViewCell

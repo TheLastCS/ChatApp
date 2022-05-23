@@ -1,7 +1,7 @@
-﻿using ChatApp.Helpers;
-using ChatApp.Models;
-using ChatApp.Pages;
-using ChatApp.Views;
+﻿using ChatApp_Leano_Stewart.Helpers;
+using ChatApp_Leano_Stewart.Models;
+using ChatApp_Leano_Stewart.Pages;
+using ChatApp_Leano_Stewart.Views;
 using Plugin.CloudFirestore;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ChatApp
+namespace ChatApp_Leano_Stewart
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChatPage : ContentPage

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ChatApp.Droid
+namespace ChatApp_Leano_Stewart.Droid
 {
     [Activity(Label = "Wave", Icon = "@mipmap/ic_launcher_foreground", Theme = "@style/splashscreen", MainLauncher = true, NoHistory = true)]
     class SplashActivity: AppCompatActivity

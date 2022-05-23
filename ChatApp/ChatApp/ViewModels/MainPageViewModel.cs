@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ChatApp.Models;
-using ChatApp.Helpers;
+using ChatApp_Leano_Stewart.Models;
+using ChatApp_Leano_Stewart.Helpers;
 using Xamarin.Forms;
 using System.Threading.Tasks;
 
-namespace ChatApp.ViewModels
+namespace ChatApp_Leano_Stewart.ViewModels
 {
     public class MainPageViewModel
     {

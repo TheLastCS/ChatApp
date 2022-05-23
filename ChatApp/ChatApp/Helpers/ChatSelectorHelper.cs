@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ChatApp.Views;
-using ChatApp.Models;
+using ChatApp_Leano_Stewart.Views;
+using ChatApp_Leano_Stewart.Models;
 using Xamarin.Forms;
 
-namespace ChatApp.Helpers
+namespace ChatApp_Leano_Stewart.Helpers
 {
     class ChatSelectorHelper : DataTemplateSelector
     {

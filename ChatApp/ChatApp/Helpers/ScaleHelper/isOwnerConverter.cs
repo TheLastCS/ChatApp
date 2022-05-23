@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using Xamarin.Forms;
 
-namespace ChatApp.Helpers.ScaleHelper
+namespace ChatApp_Leano_Stewart.Helpers.ScaleHelper
 {
     public class isOwnerConverter : IValueConverter
     {

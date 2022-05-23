@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace ChatApp
+namespace ChatApp_Leano_Stewart
 {
     public class CustomEntry : Entry
     {

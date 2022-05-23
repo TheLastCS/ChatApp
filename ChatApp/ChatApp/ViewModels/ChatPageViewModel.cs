@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;
-using ChatApp.Models;
-using ChatApp.Core;
+using ChatApp_Leano_Stewart.Models;
+using ChatApp_Leano_Stewart.Core;
 
-namespace ChatApp.ViewModels
+namespace ChatApp_Leano_Stewart.ViewModels
 {
     public class ChatPageViewModel : ObservableObject
     {

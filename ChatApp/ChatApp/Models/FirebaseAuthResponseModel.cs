@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using ChatApp.Core;
+using ChatApp_Leano_Stewart.Core;
 using System.Text;
 
-namespace ChatApp
+namespace ChatApp_Leano_Stewart
 {
     public class FirebaseAuthResponseModel : ObservableObject
     {

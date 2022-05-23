@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Xamarin.Forms;
 
-namespace ChatApp
+namespace ChatApp_Leano_Stewart
 {
     public class ShowPasswordTriggerAction : TriggerAction<ImageButton>, INotifyPropertyChanged
     {

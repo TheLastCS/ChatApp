@@ -4,7 +4,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace ChatApp.Models
+namespace ChatApp_Leano_Stewart.Models
 {
     public class LoginModel
     {

@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 
-namespace ChatApp
+namespace ChatApp_Leano_Stewart
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 

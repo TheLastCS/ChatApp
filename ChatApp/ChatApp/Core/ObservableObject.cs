@@ -4,7 +4,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ChatApp.Core
+namespace ChatApp_Leano_Stewart.Core
 {
   public class ObservableObject : INotifyPropertyChanged
     {
