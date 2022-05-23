@@ -47,7 +47,7 @@
         IsVisible="False" TextColor="Red"  Margin="15,0,0,-15"/>
             
                <!--Loading screen-->
-        <ActivityIndicator x:Name="Activity" Color="#00529C"  VerticalOptions="CenterAndExpand"></ActivityIndicator>
+        <ActivityIndicator x:Name="Activity" Color="#00529C" IsRunning="True" VerticalOptions="CenterAndExpand"></ActivityIndicator>
             
             <Label Text="Forgot Password" FontSize="Small" TextColor="Gray" HorizontalTextAlignment="End" Margin="0,0,20,25">
                 <Label.GestureRecognizers>
