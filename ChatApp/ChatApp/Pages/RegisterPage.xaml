@@ -111,12 +111,12 @@
                         <Button x:Name="SignUpGoogleBtn" Text="Sign up with Google" CornerRadius="15" Margin="10,0,0,10" VerticalOptions="Center"
                             HorizontalOptions="Fill" Grid.Row="0" Grid.Column="0" BackgroundColor="White" FontSize="Micro"
                             ImageSource="Google" ContentLayout="Left,0" TextColor="#00529C" BorderColor="#00529C" BorderWidth="1"
-                            Padding="8" Clicked="Register_Clicked">
+                            Padding="8">
                         </Button>
                         <Button x:Name="SignUpFacebookBtn" Text="Sign up with Facebook" CornerRadius="15" Margin="0,0,10,10" VerticalOptions="FillAndExpand"
                             HorizontalOptions="Fill" Grid.Row="0" Grid.Column="1" BackgroundColor="White" FontSize="Micro"
                             ImageSource="Facebook" ContentLayout="Left,20" TextColor="#00529C" BorderColor="#00529C" BorderWidth="1" 
-                            Padding="8" Clicked="SignIn_Clicked">
+                            Padding="8">
                         </Button>
                     </Grid>
                 </StackLayout>
