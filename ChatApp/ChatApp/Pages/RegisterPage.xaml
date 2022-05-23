@@ -10,7 +10,7 @@
         <ScrollView>
             <StackLayout BackgroundColor="White">
                 <!--Loading screen-->
-                <ActivityIndicator x:Name="Activity" Color="#00529C" IsRunning="True" VerticalOptions="CenterAndExpand"></ActivityIndicator>
+                
                 
                 <Frame BackgroundColor="Transparent" Padding="12,24,12,0" CornerRadius="0">
                     <Image x:Name="Logo" Source="Login" Aspect="AspectFit" WidthRequest="220"></Image>
@@ -35,6 +35,7 @@
                             </Entry.Triggers>
                         </Entry>
                     </Frame>
+                    <ActivityIndicator x:Name="Activity" Color="#00529C" IsRunning="True" VerticalOptions="CenterAndExpand"></ActivityIndicator>
                     <Frame x:Name="PasswordFrame" BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
                         <Grid>
                             <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}" TextColor="#00529C" PlaceholderColor="Gray" ReturnType="Next">
