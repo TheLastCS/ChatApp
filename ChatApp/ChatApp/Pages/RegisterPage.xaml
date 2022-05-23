@@ -9,8 +9,9 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="White">
-                <ActivityIndicator x:Name="Activity" Color="#00529C" BackgroundColor="Transparent" IsRunning="{Binding isBusy}" VerticalOptions="Center" HorizontalOptions="Center">
-                </ActivityIndicator>
+                <!--Loading screen-->
+                <ActivityIndicator x:Name="Activity" Color="#00529C" IsRunning="True" VerticalOptions="CenterAndExpand"></ActivityIndicator>
+                
                 <Frame BackgroundColor="Transparent" Padding="12,24,12,0" CornerRadius="0">
                     <Image x:Name="Logo" Source="Login" Aspect="AspectFit" WidthRequest="220"></Image>
                 </Frame>
@@ -24,6 +25,7 @@
                             </Entry.Triggers>
                         </Entry>
                     </Frame>
+                    
                     <Frame x:Name="EmailFrame" BackgroundColor="Transparent" BorderColor="#00529C" Margin="10,5,10,0" CornerRadius="15" HasShadow="True" Padding="8,0,4,0">
                         <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" TextColor="#00529C" Style="{DynamicResource EntryStyle}" PlaceholderColor="Gray" ReturnType="Next">
                             <Entry.Triggers>

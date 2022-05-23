@@ -29,10 +29,7 @@ namespace ChatApp
             {
                 PasswordFrame.BorderColor = Color.FromHex("#00529C");
             };
-
-            BindingContext = this;
-            IsBusy = false;
-            SignInBtn.Clicked += SignIn_Clicked;
+       
             
         }
         private async void SignIn_Clicked(object sender, EventArgs e)

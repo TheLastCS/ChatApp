@@ -16,6 +16,7 @@ namespace ChatApp
         public RegisterPage()
         {
             InitializeComponent();
+            Activity.IsVisible = false;
             EmailEntry.Focused += (s, a) =>
             {
                 UsernameFrame.BorderColor = Color.FromHex("#00529C");
@@ -37,7 +38,7 @@ namespace ChatApp
 
             BindingContext = this;
             IsBusy = false;
-            SignInBtn.Clicked += SignIn_Clicked;
+       
         }
 
         [Obsolete]
@@ -47,6 +48,7 @@ namespace ChatApp
             {
                 if (PasswordEntry.Text == ConfirmPasswordEntry.Text)
                 {
+                    Activity.IsVisible = true;
                     FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { };
                     response = await DependencyService.Get<iFirebaseAuth>().SignUpwithEmailPassword(UsernameEntry.Text, EmailEntry.Text, PasswordEntry.Text);
 
@@ -83,6 +85,7 @@ namespace ChatApp
                     PasswordEntry.Text = string.Empty;
                     ConfirmPasswordEntry.Text = string.Empty;
                     PasswordEntry.Focus();
+                    Activity.IsVisible = false;
                 }
             }
             else
@@ -97,6 +100,7 @@ namespace ChatApp
                 EmailEntry.Text = string.Empty;
                 PasswordEntry.Text = string.Empty;
                 ConfirmPasswordEntry.Text = string.Empty;
+                Activity.IsVisible = false;
             }
         }
         private async void SignIn_Clicked(object sender, EventArgs e)
