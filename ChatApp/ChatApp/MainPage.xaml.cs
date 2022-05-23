@@ -18,6 +18,7 @@ namespace ChatApp
             InitializeComponent();
             BindingContext = new MainPageViewModel(this);
             NavigationPage.SetHasNavigationBar(this, false);
+            Activity.IsVisible = false;
 
             EmailEntry.Focused += (s, a) =>
             {
@@ -32,11 +33,13 @@ namespace ChatApp
             BindingContext = this;
             IsBusy = false;
             SignInBtn.Clicked += SignIn_Clicked;
+            
         }
         private async void SignIn_Clicked(object sender, EventArgs e)
         {   
             if(!string.IsNullOrEmpty(EmailEntry.Text) && !string.IsNullOrEmpty(PasswordEntry.Text))
             {
+                Activity.IsVisible = true;
                 FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { };
                 response = await DependencyService.Get<iFirebaseAuth>().LoginWithEmailPassword(EmailEntry.Text, PasswordEntry.Text);
 
@@ -55,6 +58,7 @@ namespace ChatApp
                         PasswordEntry.Text = string.Empty;
                     }
                 }
+                Activity.IsVisible =false;
             } 
             else
             {

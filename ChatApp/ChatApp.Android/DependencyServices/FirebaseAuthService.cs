@@ -138,7 +138,7 @@ namespace ChatApp.Droid
         {
             try
             {
-                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = true, response = "Successfully signed in" };
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = true, response = "Successfully registered / signed up" };
                 await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
        
                 FirebaseAuth.Instance.CurrentUser.SendEmailVerification();

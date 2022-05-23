@@ -5,8 +5,8 @@
              x:Class="ChatApp.MainPage">
 
     <StackLayout BackgroundColor="White">
-        <ActivityIndicator x:Name="Activity" Color="#00529C" BackgroundColor="Transparent" IsRunning="{Binding isBusy}" VerticalOptions="Center" HorizontalOptions="Center">
-        </ActivityIndicator>
+    
+        
         <Frame BackgroundColor="Transparent" Padding="12,24,12,0" CornerRadius="0">
             <Image x:Name="Logo" Source="Login" Aspect="AspectFit" WidthRequest="240"></Image>
         </Frame>
@@ -45,7 +45,10 @@
             </Frame>
             <Label x:Name="LoginModel_PasswordError" 
         IsVisible="False" TextColor="Red"  Margin="15,0,0,-15"/>
-
+            
+               <!--Loading screen-->
+        <ActivityIndicator x:Name="Activity" Color="#00529C"  VerticalOptions="CenterAndExpand"></ActivityIndicator>
+            
             <Label Text="Forgot Password" FontSize="Small" TextColor="Gray" HorizontalTextAlignment="End" Margin="0,0,20,25">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="ForgotPassword_Tapped"></TapGestureRecognizer>
