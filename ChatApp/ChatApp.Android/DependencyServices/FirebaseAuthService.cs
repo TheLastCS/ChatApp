@@ -138,7 +138,7 @@ namespace ChatApp_Leano_Stewart.Droid
         {
             try
             {
-                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = true, response = "Successfully registered / signed up" };
+                FirebaseAuthResponseModel response = new FirebaseAuthResponseModel() { status = true, response = "Successfully created an account" };
                 await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
        
                 FirebaseAuth.Instance.CurrentUser.SendEmailVerification();

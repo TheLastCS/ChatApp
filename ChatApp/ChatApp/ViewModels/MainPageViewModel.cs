@@ -22,7 +22,7 @@ namespace ChatApp_Leano_Stewart.ViewModels
         private async Task LoginAsync()
         {
             if (!ValidationHelper.IsFormValid(LoginModel, _page)) { return; }
-            await _page.DisplayAlert("Success", "Validation Success!", "OK");
+            
         }
     }
 }
